@@ -12,13 +12,13 @@ Página Inicial
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="p-5 text-center bg-image rounded-3" style="background-image: url({% static 'images/background.png' %}); background-size: cover; height: 400px;">
+                <div class="p-5 text-center bg-image rounded-3" style="background-image: url({% static 'images/background.png' %}); background-size: cover; ">
                     <div class="">
                         <div class="d-flex justify-content-center align-items-center p-5 mt-3 rounded-3"
                             style="background-color: rgba(0, 0, 0, 0.6);">
                             <div class="text-white">
                                 <h1 class="my-3">Bem-vindos!</h1>
-                                <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="#!"
+                                <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="{% url 'validar-codigo' %}"
                                     role="button">Faça seu acesso aqui!</a>
                                 <a data-mdb-ripple-init class="btn btn-success btn-lg" href="#!" role="button">Faça seu
                                     login aqui!</a>

@@ -23,5 +23,5 @@ urlpatterns = [
     path('', RedirectView.as_view(url=reverse_lazy('pagina-inicial'), permanent=False)),  # Redireciona para o nome da URL
     path('admin/', admin.site.urls),
     path('auth_app/', include('auth_app.urls')),
-    path('validar-codigo', include('validarcodigo_app.urls')),
+    path('validarcodigo_app/', include('validarcodigo_app.urls')),
 ]
