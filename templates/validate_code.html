@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Login
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Validação do código</h1>
+    <p>O código foi recebido por email e só validando pod está fazendo o cadastro no sistema.</p>
+    <form action="{% url 'validar-codigo' %}" method="POST">
+        {% csrf_token %}
+        <label for="code">Insira o código secreto:</label>
+        <input type="text" id="code" name="code" class="col-sm-5 col-form-label" required>
+        <button class="btn btn-outline-primary m-4" type="submit">Validar Código</button>
+    </form>
+{% endblock %}
