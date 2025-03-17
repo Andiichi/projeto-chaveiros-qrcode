@@ -2,9 +2,14 @@ from django.contrib import admin
 from django.urls import path
 from auth_app.views import *
 
+from django.views.generic import TemplateView
+
+app_name = 'auth_app'  # Definição do namespace para a aplicação de autenticação
+
 urlpatterns = [
-    path('pagina-inicial', home, name='pagina-inicial'),  # URL para a página inicial
-    # path('cadastro/<str:codigo>/', Register, name='cadastro'),  # URL para o registro com código
-    # path('login/', Login, name='entrar'),  # URL para o login com código
-    # path('logout/', Logout, name='sair') # URL para o logout com código
+    path('pagina-inicial/', TemplateView.as_view(template_name='pagina-inicial.html'), name='pagina_inicial'),
+    path('register/<str:codigo>/', cadastro, name='cadastro'), # URL para o registro com código
+    path('login/', login_view, name='entrar'),  # URL para o login com código
+    path('logout/', logout_view, name='sair'), # URL para o logout com código
+    path('dashboard/', dashboard, name='dashboard')
 ]

@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container w-50 text-white d-flex flex-column align-items-center rounded-3 p-4"
+        style="background-color: rgba(0, 0, 0, 0.3);">
+
+        <h1 class="text-center my-3 display-5">Bem-vindo, {{ user.first_name }} {{ user.last_name }}!</h1>
+
+        <div class="col text-start">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            
+
+            <!-- Exibir os grupos do usuário -->
+            <p><strong>Grupo(s):</strong> 
+                {% for group in user.groups.all %}
+                    {{ group.name }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    Nenhum grupo associado.
+                {% endfor %}
+            </p>
+
+            <p><strong>Data de criação:</strong> {{ user.date_joined|date:"d/m/Y H:i" }}</p>
+            
+            <a class="btn btn-outline-light" href="{% url 'auth_app:sair' %}" role="button">Logout</a>
+            <a class="btn btn-dark my-4" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
+        </div>
+
+    </div>
+</div>
+
+{% else %}
+
+<p>Faça seu login primeiro</p>
+<a class="btn btn-outline-primary my-4" href="{% url 'entrar' %}" role="button">Login</a>
+<a class="btn btn-outline-primary my-4" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
+
+{% endif %}
+
+{% endblock %}

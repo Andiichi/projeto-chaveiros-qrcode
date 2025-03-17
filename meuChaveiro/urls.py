@@ -16,12 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, reverse_lazy
-from django.views.generic.base import RedirectView
-
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', RedirectView.as_view(url=reverse_lazy('pagina-inicial'), permanent=False)),  # Redireciona para o nome da URL
+    path('', RedirectView.as_view(url=reverse_lazy('auth_app:pagina_inicial'))),
     path('admin/', admin.site.urls),
-    path('auth_app/', include('auth_app.urls')),
-    path('validarcodigo_app/', include('validarcodigo_app.urls')),
+    path('autenticacao_app/', include('auth_app.urls')),
+    path('validar-codigo/', include('validarcodigo_app.urls')),
 ]

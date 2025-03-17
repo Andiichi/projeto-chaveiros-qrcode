@@ -1,57 +1,3 @@
-# from django.contrib import admin
-# from django.utils import timezone
-# from validarcodigo_app.models import CodigoSecreto
-
-
-# class CodigoSecretoAdmin(admin.ModelAdmin):
-#     list_display = ('code_display', 'group', 'user_display', 'created_at_display', 'used_at_display', 'used')  # Campos a serem exibidos
-#     search_fields = ('code_display', 'group__name', 'user__username')  # Campos de pesquisa
-#     # list_filter = ('group', 'used')
-#     readonly_fields = ('code_display', 'group', 'user_display', 'created_at_display')  # Mantém visíveis, mas não editáveis
-#     ordering = ('-created_at',)
-
-#     def save_model(self, request, obj, form, change):
-#         if not obj.pk:  # Se for um novo código
-#             obj.user = request.user  # Define o usuário automaticamente
-#         super().save_model(request, obj, form, change)
-
-    
-#     # Métodos para exibir textos padrões em campos readonly
-#     @admin.display(description="Código Secreto")
-#     def code_display(self, obj):
-#         return obj.code if obj.code else "Código será gerado automaticamente"
-
-#     @admin.display(description="Criado por")
-#     def user_display(self, obj):
-#         return obj.user.username if obj.user else "Usuário será definido automaticamente"
-
-#     @admin.display(description="Criado em")
-#     def created_at_display(self, obj):
-#         return obj.created_at.strftime('%d/%m/%Y %H:%M') if obj.created_at else "Será preenchido na criação"
-
-#     # Exibe uma bolinha booleana ao invés de texto
-#     @admin.display(description="Usado em", boolean=True)
-#     def used_at_display(self, obj):
-#         return bool(obj.used_at)  # Retorna True se 'used_at' tiver uma data, False se for None
-
-
-#     # Ações personalizadas para alterar o status do codigo
-#     @admin.action(description="Alterar para 'usado'")
-#     def marcar_como_usado(self, request, queryset):
-#         updated = queryset.update(used=True, used_at=timezone.now())
-#         self.message_user(request, f'{updated} código(s) marcado(s) como usado(s).')
-
-#     @admin.action(description="Alterar para 'disponivel'")
-#     def marcar_como_disponivel(self, request, queryset):
-#         updated = queryset.update(used=False, used_at=None)
-#         self.message_user(request, f'{updated} código(s) marcado(s) como disponível(is).')
-    
-
-#     actions = [marcar_como_disponivel, marcar_como_usado]
-
-# admin.site.register(CodigoSecreto, CodigoSecretoAdmin)
-
-
 from django.contrib import admin
 from django.utils import timezone
 from .models import CodigoSecreto
@@ -119,5 +65,6 @@ class CodigoSecretoAdmin(admin.ModelAdmin):
     
 
     actions = [marcar_como_disponivel, marcar_como_usado]
+
 
 admin.site.register(CodigoSecreto, CodigoSecretoAdmin)

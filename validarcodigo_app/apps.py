@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
-
-class ValidarcodigoAppConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'validarcodigo_app'
-    verbose_name = 'Gerenciamento de Códigos Secretos'
+class ValidarCodigoAppConfig(AppConfig):  # ⬅️ Nome da classe de configuração do app
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "validarcodigo_app"  # ⬅️ Nome original do app (mantenha o caminho correto)
+    verbose_name = "Gereciamento de Códigos Secretos"  # ⬅️ Nome amigável que aparecerá no Admin
