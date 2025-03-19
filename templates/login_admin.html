@@ -10,10 +10,10 @@ Login
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="fundo container text-white d-flex flex-column align-items-center rounded-3 p-5" style="width: 120vh;">
 
-        <h1 class="text-center mb-4 display-4">Faça seu login!</h1>
+        <h1 class="text-center mb-4 display-5">Acesse o painel administrativo!</h1>
 
         <div class="col-12 col-md-10 col-lg-8">
-            <form method="POST" action="{% url 'auth_app:entrar' %}" class="w-80">
+            <form method="POST" action="{% url 'auth_app:admin_entrar' %}" class="w-80">
 
                 {% csrf_token %}
                 <div class="row">

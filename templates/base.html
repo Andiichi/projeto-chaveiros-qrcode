@@ -19,9 +19,11 @@
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
+</head>
+
 <body>
     {% if messages %}
-    <div style="position: fixed; top: 20px; right: 20px; z-index: 1050;">
+    <div class="alerta">
         {% for message in messages %}
         {% if 'success' in message.tags %} <!-- se for sucesso -->
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,6 +47,11 @@
         {% endfor %}
     </div>
     {% endif %}
+
+    
+    <!-- Navigation -->
+    {% include 'navbar.html' %}
+
 
     <main class="container mx-auto">
         {% block content %}

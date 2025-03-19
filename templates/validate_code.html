@@ -1,5 +1,9 @@
-{{% extends 'base.html' %}
+{% extends 'base.html' %}
+{% load bootstrap5 %}
 {% load static %}
+{% bootstrap_css %}
+
+
 
 {% block title %}
 Login
@@ -8,8 +12,7 @@ Login
 {% block content %}
 
 <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="container w-50 text-white d-flex flex-column align-items-center rounded-3 p-5"
-        style="background-color: rgba(0, 0, 0, 0.3);">
+    <div  class="fundo container w-50 text-white d-flex flex-column align-items-center rounded-3 p-5">
 
         <h1 class="text-center my-4 display-6">Faça sua validação de código!</h1>
 
@@ -18,7 +21,7 @@ Login
 
                 {% csrf_token %}
                 <div class="mb-3">
-                    <input type="text" id="code" name="code" class="form-control  form-control-lg" placeholder="Insira seu codigo secreto aqui..." required>
+                    <input type="text" id="code" name="code" class="form-control form-control-lg" placeholder="Insira seu codigo secreto aqui..." required>
                 </div>
                
                 <div class="d-grid">
@@ -27,7 +30,7 @@ Login
             </form>
 
             <div class="text-center mt-4">
-                <a class="btn btn-dark" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
+                <a class="btn btn-outline-light" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
             </div>
             
         </div>
