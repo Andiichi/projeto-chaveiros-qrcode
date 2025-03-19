@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SESSION_COOKIE_NAME = 'session_user'  # Sessão padrão para usuários comuns
 
 # Application definition
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'auth_app',
     'validarcodigo_app',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'meuChaveiro.middlewares.SeparateAdminSessionMiddleware',  # Middleware para separar sessões de usuários comuns e administradores
 ]
 
 ROOT_URLCONF = 'meuChaveiro.urls'

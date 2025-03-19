@@ -5,3 +5,25 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
 }
+
+div.fundo {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.alerta {
+   position: fixed; top: 20px; right: 20px; z-index: 1050;
+}
+
+
+.hover-bold {
+    font-size: 1.2rem !important;
+    font-weight: bolder !important;
+    color: white; /* Cor inicial */
+    transition: color 0.3s ease-in-out; /* Suaviza a transição */
+}
+
+.hover-bold:hover {
+    text-underline-offset: 1.2rem !important;
+    text-decoration: underline !important;
+    color: black; /* Cor final */
+}

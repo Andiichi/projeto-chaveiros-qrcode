@@ -9,7 +9,8 @@ app_name = 'auth_app'  # Definição do namespace para a aplicação de autentic
 urlpatterns = [
     path('pagina-inicial/', TemplateView.as_view(template_name='pagina-inicial.html'), name='pagina_inicial'),
     path('register/<str:codigo>/', cadastro, name='cadastro'), # URL para o registro com código
-    path('login/', login_view, name='entrar'),  # URL para o login com código
+    path('login/', user_login, name='entrar'),
+    path('admin-login/', admin_login, name='admin_entrar'),
     path('logout/', logout_view, name='sair'), # URL para o logout com código
     path('dashboard/', dashboard, name='dashboard')
 ]
