@@ -12,5 +12,6 @@ urlpatterns = [
     path('login/', user_login, name='entrar'),
     path('admin-login/', admin_login, name='admin_entrar'),
     path('logout/', logout_view, name='sair'), # URL para o logout com código
+    path('alterar_senha/', alterar_senha, name='alterar_senha'),
     path('dashboard/', dashboard, name='dashboard')
 ]

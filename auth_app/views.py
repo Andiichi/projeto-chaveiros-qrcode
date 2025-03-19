@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate, login, update_session_auth_hash
 from django.contrib import messages  
 from django.contrib.auth.models import Group, User
 from validarcodigo_app.models import CodigoSecreto
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 def cadastro(request, codigo):
     if request.method == 'POST':
@@ -58,6 +60,28 @@ def admin_login(request):
     return render(request, 'login_admin.html')
 
 
+def alterar_senha(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        # Verificar se o nome de usuário corresponde ao usuário autenticado
+        if username != request.user.username:
+            messages.error(request, "Nome de usuário inválido.")
+            return redirect('auth_app:alterar_senha')  # Redireciona de volta para a página de alteração de senha
+
+        form_senha = PasswordChangeForm(request.user, request.POST)
+        if form_senha.is_valid():
+            user = form_senha.save()
+            update_session_auth_hash(request, user)  # Mantém o usuário autenticado após a alteração
+            messages.success(request, "Senha alterada com sucesso!")
+            return redirect('auth_app:dashboard')  # Altere o nome da URL conforme necessário
+        else:
+            messages.error(request, "Houve um erro ao alterar a senha. Tente novamente.")
+    else:
+        form_senha = PasswordChangeForm(request.user)
+    
+    return render(request, 'alterar_senha.html', {'form_senha': form_senha})
+
+
 # def login_view(request):
 #     if request.user.is_authenticated:
 #         return redirect('auth_app:dashboard')  # Ou qualquer outra página
@@ -80,12 +104,14 @@ def admin_login(request):
 
 #     return render(request, 'login.html')
 
-@login_required
+
+@login_required(login_url='/login')
 def logout_view(request):
     logout(request)
     return redirect('auth_app:pagina_inicial')  # Redireciona para a página de login
 
 
-@login_required
+
+@login_required(login_url='/login')
 def dashboard(request):
     return render(request, 'dashboard.html')
