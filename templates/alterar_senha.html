@@ -2,58 +2,37 @@
 {% load static %}
 
 {% block title %}
-Alterar senha
+Nova Senha
 {% endblock %}
 
 {% block content %}
 
 <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="fundo container text-white d-flex flex-column align-items-center rounded-3 p-5" style="width: 120vh;">
-        
-        <h1 class="text-center mb-4 display-4">Redefinição de senha</h1>
+    <div class="fundo container w-50 text-white d-flex flex-column align-items-center rounded-3 p-5">
+
+        <h1 class="text-center my-3 display-4">Digite sua nova senha</h1>
 
         <div class="col-12 col-md-10 col-lg-8">
-            <form method="POST" class="w-80">
+            <form method="POST" action="{% url 'auth_app:alterar_senha' %}" class="w-100">
                 {% csrf_token %}
 
-                <!-- Campo de email (ou Email) -->
                 <div class="mb-3">
-                    <label for="email" class="form-label font-weight-bold">Email:</label>
-                    <input type="email" name="email" id="email" class="form-control form-control-lg"
-                        placeholder="Digite seu email..." required>
+                    <label for="password1" class="form-label">Nova senha:</label>
+                    <input type="password" name="password1" id="password1" class="form-control form-control-lg" required>
                 </div>
 
-                <!-- Campo para Senha Atual -->
                 <div class="mb-3">
-                    <label for="old_password" class="form-label font-weight-bold">Senha atual:</label>
-                    <input type="password" name="old_password" id="old_password" class="form-control form-control-lg"
-                        placeholder="Digite sua senha atual..." required>
+                    <label for="password2" class="form-label">Confirme sua senha:</label>
+                    <input type="password" name="password2" id="password2" class="form-control form-control-lg" required>
                 </div>
 
-                <!-- Campo para Nova Senha -->
-                <div class="mb-3">
-                    <label for="new_password1" class="form-label font-weight-bold">Nova senha:</label>
-                    <input type="password" name="new_password1" id="new_password1" class="form-control form-control-lg"
-                        placeholder="Digite sua nova senha..." required>
-                </div>
-
-                <!-- Campo para Confirmar Nova Senha -->
-                <div class="mb-3">
-                    <label for="new_password2" class="form-label font-weight-bold">Confirmar nova senha:</label>
-                    <input type="password" name="new_password2" id="new_password2" class="form-control form-control-lg"
-                        placeholder="Confirme sua nova senha..." required>
-                </div>
-
-                <!-- Botão de Envio -->
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">Alterar a senha</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Redefinir Senha</button>
                 </div>
-
             </form>
 
-            <!-- Link para Voltar à Página Inicial -->
             <div class="text-center mt-4">
-                <a class="btn btn-outline-light" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
+                <a class="btn btn-dark" href="{% url 'auth_app:entrar' %}" role="button">Voltar ao login</a>
             </div>
         </div>
 

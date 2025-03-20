@@ -8,39 +8,41 @@ Login
 {% block content %}
 
 <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="fundo container text-white d-flex flex-column align-items-center rounded-3 p-5" style="width: 120vh;">
+    <div class="fundo container w-50 text-white d-flex flex-column align-items-center rounded-3 p-5">
 
-        <h1 class="text-center mb-4 display-4">Faça seu login!</h1>
+        <h1 class="text-center my-3 display-4">Faça seu login!</h1>
 
         <div class="col-12 col-md-10 col-lg-8">
-            <form method="POST" action="{% url 'auth_app:entrar' %}" class="w-80">
-
+            <form method="POST" action="{% url 'auth_app:entrar' %}" class="w-100">
                 {% csrf_token %}
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <label for="email" class="form-label font-weight-bold">Email:</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-lg"
-                                placeholder="Digite seu email..." required>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Senha:</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-lg"
-                            placeholder="Digite sua senha..." required>
-                        </div>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
-                    </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control form-control-lg" required>
                 </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha:</label>
+                    <input type="password" name="password" id="password" class="form-control form-control-lg" required>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'auth_app:alterar_senha' %}" class="text-light">Esqueceu a senha?</a>
+                </div>
+
+                <div class="d-grid mt-3">
+                    <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                </div>
+
             </form>
-            <a class="d-flex justify-content-center  link-light" href="{% url 'auth_app:alterar_senha' %}">Redefinir senha</a>
 
             <div class="text-center mt-4">
-                <a class="btn btn-outline-light" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à
-                    página inicial</a>
+                <span>Ainda não tem uma conta?</span>
+                <a href="" class="text-light fw-bold">Cadastre-se</a>
+            </div>
+
+            <div class="text-center mt-3">
+                <a class="btn btn-dark" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
             </div>
         </div>
 
