@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, reverse_lazy
 from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', RedirectView.as_view(url=reverse_lazy('auth_app:pagina_inicial'))),
@@ -24,3 +27,7 @@ urlpatterns = [
     path('autenticacao_app/', include('auth_app.urls')),
     path('validar-codigo/', include('validarcodigo_app.urls')),
 ]
+
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

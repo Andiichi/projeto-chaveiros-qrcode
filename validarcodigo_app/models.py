@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import  Group
+from django.conf import settings 
 import uuid
-from django.utils import timezone
 
 class CodigoSecreto(models.Model):
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -9,7 +9,7 @@ class CodigoSecreto(models.Model):
     used = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)  # Define automaticamente a data de criação
     used_at = models.DateTimeField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)  # Usuário que gerou o código
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="secret_codes")  # Usuário que gerou o código
 
     class Meta:
         verbose_name = "Codigo Secreto"

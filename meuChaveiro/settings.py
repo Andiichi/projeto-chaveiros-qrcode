@@ -27,6 +27,8 @@ SECRET_KEY = 'django-insecure-l)k@c4df_-f6qfkh@xc2b#vr!r7+^%7(h!q%4*h+c4t&&8p%8u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = 'auth_app.User'  # Define o modelo de usuário personalizado
+
 ALLOWED_HOSTS = []
 
 SESSION_COOKIE_NAME = 'session_user'  # Sessão padrão para usuários comuns
@@ -83,7 +85,7 @@ WSGI_APPLICATION = 'meuChaveiro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'meuChaveiro.sqlite3',
     }
 }
 
@@ -123,6 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
