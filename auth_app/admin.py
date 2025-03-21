@@ -13,27 +13,18 @@ class CustomUserAdmin(UserAdmin):
     """Admin personalizado para o modelo User"""
 
     model = User
-    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'data_nascimento')
-    list_filter = ('is_staff', 'is_superuser', 'is_active')
-    search_fields = ('email', 'first_name', 'last_name', 'bio', 'endereco')
+    list_display = ('email', 'first_name', 'last_name', 'is_staff')  # Adicionando o campo 'photo' ao list_display
+    search_fields = ('email', 'first_name')
     ordering = ('email',)
-    
+    readonly_fields = ('first_name', 'last_name', 'email', 'data_nascimento')  # Remova 'username' se não existir
+
     fieldsets = (
-        ("Informações Pessoais", {"fields": ("email", "first_name", "last_name", "password", "foto_profile", "bio", "endereco", "data_nascimento")}),
-        ("Permissões", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
-        ("Datas Importantes", {"fields": ("last_login", "date_joined")}),
+        ('Dados de acesso', {'fields': ('email', 'password', 'is_active')}),
+        ('Dados pessoais', {'fields': ('foto_profile', 'first_name', 'last_name', 'data_nascimento', 'endereco')}),  # Adicionando o campo 'photo' aqui
+        ('Grupos', {'fields': ('groups',)}),
+        ('Ultimo login e cadastro', {'fields': ('last_login', 'date_joined')}),
     )
-
-    add_fieldsets = (
-        (
-            "Criar Novo Usuário",
-            {
-                "classes": ("wide",),
-                "fields": ("email", "first_name", "last_name", "password1", "password2", "foto_profile", "bio", "endereco", "data_nascimento"),
-            },
-        ),
-    )
-
+    
     inlines = [PhoneNumberInline]  # Adiciona o inline para exibir números de telefone
 
 admin.site.register(User, CustomUserAdmin)

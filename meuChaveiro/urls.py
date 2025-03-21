@@ -26,8 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Django Admin
     path('autenticacao_app/', include('auth_app.urls')),
     path('validar-codigo/', include('validarcodigo_app.urls')),
-]
-
-
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

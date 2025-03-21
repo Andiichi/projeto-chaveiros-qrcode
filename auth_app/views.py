@@ -1,10 +1,14 @@
+from datetime import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, authenticate, login, update_session_auth_hash, get_user_model
 from django.contrib import messages  
-from django.contrib.auth.models import Group
 from validarcodigo_app.models import CodigoSecreto
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.utils import timezone
+
+
+
 
 User = get_user_model()  # Busca o modelo de usuário dinamicamente
 
@@ -18,18 +22,17 @@ def cadastro(request, codigo):
         grupo = None
 
     if request.method == 'POST':
-        email = request.POST.get('email')
+        email = request.POST.get('email').strip()
         password = request.POST.get('password')
-        first_name = request.POST.get('first_name')  # Nome
-        last_name = request.POST.get('last_name')  # Sobrenome
+        first_name = request.POST.get('first_name').strip()
+        last_name = request.POST.get('last_name').strip()
 
-        if secret_code:
-            user = User.objects.create_user(email=email, password=password)
-
-            # Atribuindo o nome e sobrenome ao usuário
-            user.first_name = first_name
-            user.last_name = last_name
-            user.save()
+        # Verifica se o e-mail já está cadastrado
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Este e-mail já está cadastrado. Tente outro ou faça login.')
+            
+        elif secret_code:
+            user = User.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name)
 
             # Adiciona o usuário ao grupo, se existir
             if grupo:
@@ -37,14 +40,17 @@ def cadastro(request, codigo):
 
             # Marca o código como usado
             secret_code.used = True
+            secret_code.used_at = timezone.now()
             secret_code.save()
 
             messages.success(request, 'Cadastro realizado com sucesso! Você já pode fazer login.')
             return redirect('auth_app:entrar')
 
-        messages.error(request, 'Código inválido ou já utilizado.')
+        else:
+            messages.error(request, 'Código inválido ou já utilizado.')
 
     return render(request, 'register.html', {'codigo': codigo, 'grupo': grupo})
+
 
 
 def user_login(request):
@@ -55,7 +61,7 @@ def user_login(request):
         # Autenticar usuário com email
         user = authenticate(request, email=email, password=password)
 
-        if user is not None and not user.is_staff:
+        if user is not None:
             login(request, user)
             messages.success(request, f'Bem-vindo, {user.first_name}!')
             return redirect('auth_app:dashboard')
@@ -64,8 +70,12 @@ def user_login(request):
 
     return render(request, 'login.html')
 
+
+
 def admin_login(request):
    return redirect('/admin/login/')
+
+
 
 @login_required(login_url='auth_app:entrar')
 def alterar_senha(request):

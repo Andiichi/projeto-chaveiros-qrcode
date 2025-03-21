@@ -31,11 +31,11 @@ AUTH_USER_MODEL = 'auth_app.User'  # Define o modelo de usuário personalizado
 
 ALLOWED_HOSTS = []
 
-SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Backend de sessão padrão
+# Configuração para sessões de usuários normais
+SESSION_COOKIE_NAME = 'sessionid_user'
 
-SESSION_COOKIE_NAME = "sessionid"  # Sessão normal dos usuários
-
-ADMIN_SESSION_COOKIE_NAME = "admin_sessionid"  # Sessão separada para o Django Admin
+# Configuração para sessões de admin
+ADMIN_SESSION_COOKIE_NAME = 'sessionid_admin'
 
 # Application definition
 
@@ -51,6 +51,12 @@ INSTALLED_APPS = [
     'bootstrap5',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'auth_app.backends.EmailBackend',  # Caminho correto para o backend personalizado
+    'django.contrib.auth.backends.ModelBackend',  # Para usar o backend padrão do Django também
+]
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,7 +65,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'meuChaveiro.middlewares.SeparateAdminSessionMiddleware',  # Middleware para separar sessões de usuários comuns e administradores
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'meuChaveiro.middlewares.SeparateSessionMiddleware',  # Middleware para separar sessões de usuários comuns e administradores
+  
 ]
 
 ROOT_URLCONF = 'meuChaveiro.urls'
