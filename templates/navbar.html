@@ -1,7 +1,4 @@
-{% load static %}
-
-<nav class="container-fluid fixed-top navbar bg-primary navbar-expand-lg  shadow-sm px-4"  style="--bs-bg-opacity: .5;">
-
+<nav class="container-fluid sticky-top navbar bg-primary navbar-expand-lg shadow-sm px-4" style="--bs-bg-opacity: .8;">
     <button class="navbar-toggler align-items-end" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -11,32 +8,23 @@
     <a class="navbar-brand d-block text-light fs-3" href="/">meuChaveiro</a>
 
     <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
-        <ul class="navbar-nav d-flex align-items-center gap-5">
-            <li class="nav-item traco-bottom"><a class="nav-link d-flex align-items-center  hover-bold "
-                    href="/">Home</a></li>
-            <li class="nav-item traco-bottom"><a class="nav-link d-flex align-items-center  hover-bold"
-                    href="#">Preço</a></li>
-            <li class="nav-item traco-bottom"><a class="nav-link d-flex align-items-center  hover-bold " href="#">Como
-                    funciona?</a></li>
-            <li class="nav-item traco-bottom"><a class="nav-link d-flex align-items-center  hover-bold "
-                    href="#">Sobre</a></li>
-            <li class="nav-item traco-bottom"><a class="nav-link d-flex align-items-center hover-bold "
-                    href="#">Contato</a></li>
-            <li class="nav-item traco-bottom"><a class="nav-link d-flex align-items-center  hover-bold "
-                    href="#">Comprar</a></li>
+        <ul class="navbar-nav d-flex align-items-center gap-4">
+            <li class="nav-item"><a class="nav-link text-light hover-bold" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link text-light hover-bold" href="#">Preço</a></li>
+            <li class="nav-item"><a class="nav-link text-light hover-bold" href="#">Como funciona?</a></li>
+            <li class="nav-item"><a class="nav-link text-light hover-bold" href="#">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link text-light hover-bold" href="#">Contato</a></li>
+            <li class="nav-item"><a class="nav-link text-light hover-bold" href="#">Comprar</a></li>
         </ul>
     </div>
 
     <a class="btn btn-outline-dark d-sm-block d-md-none" href="/admin" role="button">
         <span class="material-symbols-outlined">person</span>
     </a>
-    <!-- Botão de Login  -->
     <div class="d-none d-md-block">
-        <a href="/admin" type="button"
-            class="btn btn-outline-light  d-flex align-items-center">
+        <a href="{% url 'auth_app:admin_login' %}" class="btn btn-outline-light d-flex align-items-center">
             <span class="material-symbols-outlined">person</span>
-            <span class="d-none d-sm-inline ">Admin</span>
+            <span class="d-none d-sm-inline">Admin</span>
         </a>
-
     </div>
 </nav>

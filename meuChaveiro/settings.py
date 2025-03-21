@@ -31,7 +31,11 @@ AUTH_USER_MODEL = 'auth_app.User'  # Define o modelo de usuário personalizado
 
 ALLOWED_HOSTS = []
 
-SESSION_COOKIE_NAME = 'session_user'  # Sessão padrão para usuários comuns
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Backend de sessão padrão
+
+SESSION_COOKIE_NAME = "sessionid"  # Sessão normal dos usuários
+
+ADMIN_SESSION_COOKIE_NAME = "admin_sessionid"  # Sessão separada para o Django Admin
 
 # Application definition
 

@@ -1,58 +1,61 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-Cadastro
-{% endblock %}
+{% block title %}Cadastro{% endblock %}
 
 {% block content %}
 
-<div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="fundo container w-50 text-white d-flex flex-column align-items-center rounded-3 p-5">
+<div class="d-flex justify-content-center align-items-center vh-100" style="margin-top: 60px;">
+    <div class="container bg-dark text-white rounded-3 p-5" style="max-width: 500px;">
+        <h1 class="text-center mb-4 display-6">Crie sua conta!</h1>
 
-        <h1 class="text-center my-3 display-4">Crie sua conta!</h1>
-
-        <div class="col-12 col-md-10 col-lg-8">
-            <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" class="w-100">
-
-                {% csrf_token %}
-                
-                <div class="mb-3">
-                    <label for="first_name" class="form-label">Nome:</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control form-control-lg" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="last_name" class="form-label">Sobrenome:</label>
-                    <input type="text" name="last_name" id="last_name" class="form-control form-control-lg" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" name="email" id="email" class="form-control form-control-lg" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="password1" class="form-label">Senha:</label>
-                    <input type="password" name="password1" id="password1" class="form-control form-control-lg" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="password2" class="form-label">Confirme sua senha:</label>
-                    <input type="password" name="password2" id="password2" class="form-control form-control-lg" required>
-                </div>
-
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
-                </div>
-
-            </form>
-
-            <div class="text-center mt-4">
-                <a class="btn btn-dark" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
+        <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="first_name" class="form-label">Nome:</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" required>
             </div>
-        </div>
+            
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Sobrenome:</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" id="email" class="form-control" required>
+            </div>
+            
+            
+            <div class="mb-3">
+                <label for="codigo_secreto" class="form-label">Código Secreto:</label>
+                <input type="text" name="codigo_secreto" id="codigo_secreto" class="form-control" value="{{ codigo }}" readonly>
+            </div>
+            
+            <div class="mb-3">
+                <label for="grupo" class="form-label">Grupo:</label>
+                <input type="text" name="grupo" id="grupo" class="form-control" value="{{ grupo }}" readonly>
+            </div>
+            
+            <div class="mb-3">
+                <label for="password1" class="form-label">Senha:</label>
+                <input type="password" name="password1" id="password1" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="password2" class="form-label">Confirme sua senha:</label>
+                <input type="password" name="password2" id="password2" class="form-control" required>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+            </div>
+        </form>
 
+        <div class="text-center mt-3">
+            <a class="btn btn-light" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
+        </div>
     </div>
 </div>
 

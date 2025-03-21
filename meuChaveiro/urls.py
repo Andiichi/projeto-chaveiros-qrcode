@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', RedirectView.as_view(url=reverse_lazy('auth_app:pagina_inicial'))),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),  # Django Admin
     path('autenticacao_app/', include('auth_app.urls')),
     path('validar-codigo/', include('validarcodigo_app.urls')),
 ]

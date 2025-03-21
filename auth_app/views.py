@@ -10,35 +10,41 @@ User = get_user_model()  # Busca o modelo de usuário dinamicamente
 
 
 def cadastro(request, codigo):
+    try:
+        secret_code = CodigoSecreto.objects.get(code=codigo, used=False)
+        grupo = secret_code.group  # Obtendo o grupo associado ao código
+    except CodigoSecreto.DoesNotExist:
+        secret_code = None
+        grupo = None
+
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
+        first_name = request.POST.get('first_name')  # Nome
+        last_name = request.POST.get('last_name')  # Sobrenome
 
-        # Verificar se a senha tem um tamanho mínimo de 6 caracteres
-        if len(password) < 6:
-            messages.error(request, 'A senha deve ter pelo menos 6 caracteres.')
-            return redirect('auth_app:cadastro', codigo=codigo)
-
-        try:
-            secret_code = CodigoSecreto.objects.get(code=codigo, used=False)
-
-            # Criar usuário com email e senha
+        if secret_code:
             user = User.objects.create_user(email=email, password=password)
 
-            # Adicionar grupo, se existir
-            if secret_code.group:
-                user.groups.add(secret_code.group)
+            # Atribuindo o nome e sobrenome ao usuário
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
 
+            # Adiciona o usuário ao grupo, se existir
+            if grupo:
+                user.groups.add(grupo)
+
+            # Marca o código como usado
             secret_code.used = True
             secret_code.save()
 
             messages.success(request, 'Cadastro realizado com sucesso! Você já pode fazer login.')
             return redirect('auth_app:entrar')
 
-        except CodigoSecreto.DoesNotExist:
-            messages.error(request, 'Código inválido ou já utilizado.')
+        messages.error(request, 'Código inválido ou já utilizado.')
 
-    return render(request, 'register.html', {'codigo': codigo})
+    return render(request, 'register.html', {'codigo': codigo, 'grupo': grupo})
 
 
 def user_login(request):
@@ -58,6 +64,8 @@ def user_login(request):
 
     return render(request, 'login.html')
 
+def admin_login(request):
+   return redirect('/admin/login/')
 
 @login_required(login_url='auth_app:entrar')
 def alterar_senha(request):
@@ -82,6 +90,9 @@ def logout_view(request):
     next_url = request.GET.get('next', 'auth_app:pagina_inicial')  # Redireciona para a página inicial ou outro destino
     return redirect(next_url)
 
+def admin_logout(request):
+    logout(request)
+    return redirect('/admin/login/')
 
 @login_required(login_url='auth_app:entrar')
 def dashboard(request):
