@@ -7,23 +7,31 @@ Página Inicial
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center align-items-center min-vh-100">
-        <div class="col-md-10 col-lg-8 text-center">
-            <div class="bg-image text-white rounded-3 p-5">
-                <h1 class="mb-4 display-3">Bem-vindo(a)!</h1>
-                
-                <!-- Botões centralizados e espaçamento aplicado a partir de sm -->
-                <div class="d-block">
-                    <a class="btn btn-outline-light btn-lg mx-3 my-2 " href="{% url 'validar-codigo' %}" role="button">
-                        Faça seu cadastro aqui!
-                    </a>
-                    <a class="btn btn-primary btn-lg mx-3 my-2" href="{% url 'auth_app:entrar' %}" role="button">
-                        Faça seu login aqui!
-                    </a>
+
+<div class="container mt-lg-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-10 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Card Body -->
+                    <div class="p-5 text-center">
+                        <div class="text-center">
+                            <h1 class="text-gray-900 mb-4 display-3">Bem-vindo(a)!</h1>
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-primary mb-3 d-sm-inline-block" href="{% url 'validar-codigo' %}" role="button">
+                                Faça seu cadastro aqui!
+                            </a>
+                            <a class="btn btn-primary mb-3 d-sm-inline-block" href="{% url 'auth_app:entrar' %}" role="button">
+                                Faça seu login aqui!
+                            </a>
+                        </div>
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

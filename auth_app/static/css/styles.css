@@ -9,11 +9,8 @@ body {
 
 div.fundo {
     background-color: rgba(0, 0, 0, 0.3);
-}
+ }
 
-.alerta {
-   position: fixed; top: 20px; right: 20px; z-index: 1050;
-}
 
 
 .hover-bold {

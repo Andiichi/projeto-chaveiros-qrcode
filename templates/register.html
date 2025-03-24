@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="d-flex justify-content-center align-items-center vh-100" style="margin-top: 60px;">
+<!-- <div class="d-flex justify-content-center align-items-center vh-100" style="margin-top: 60px;">
     <div class="container bg-dark text-white rounded-3 p-5" style="max-width: 500px;">
         <h1 class="text-center mb-4 display-6">Crie sua conta!</h1>
 
@@ -57,6 +57,95 @@
             <a class="btn btn-light" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
         </div>
     </div>
+</div> -->
+
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-8 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Card Body -->
+                    <div class="p-5">
+                        {% if messages %}
+                                {% include './components/alerts.html' %}
+                        {% endif %}
+
+                        <div class="text-center">
+                            <h1 class=" text-gray-900 mb-4 display-6">Faça seu cadastro!</h1>
+                        </div>
+                        <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="first_name" class="form-label pl-4 small">Nome:</label>
+                                    <input type="text" name="first_name" id="first_name"
+                                        class="form-control form-control-user pl-4" placeholder="Digite seu nome...">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="last_name" class="form-label pl-4 small">Sobrenome:</label>
+                                    <input type="text" name="last_name" id="last_name"
+                                        class="form-control form-control-user" placeholder="Digite seu sobrenome...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label pl-4 small">Email:</label>
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Digite seu email...">
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="codigo_secreto" class="form-label pl-4 small">Código Secreto:</label>
+                                    <input type="text" name="codigo_secreto" id="codigo_secreto"
+                                        class="form-control form-control-user" value="{{ codigo }}" readonly>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="grupo" class="form-label pl-4 small">Grupo:</label>
+                                    <input type="text" name="grupo" id="grupo" class="form-control form-control-user"
+                                        value="{{ grupo }}" readonly>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="password" class="form-label pl-4 small">Senha:</label>
+                                    <input type="password" class="form-control form-control-user"
+                                        id="exampleInputPassword" placeholder="Digite sua senha...">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password" class="form-label pl-4 small">Confirme a senha:</label>
+                                    <input type="password" class="form-control form-control-user"
+                                        id="exampleRepeatPassword" placeholder="Repetir a sua senha...">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-user btn-block">Cadastrar</button>
+
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a href="">Esqueci minha senha.</a>
+                        </div>
+                        <div class="text-center">
+                            Já tem uma conta? <a href="{% url 'auth_app:entrar' %}">Faça o login aqui.</a>
+                        </div>
+                        <hr>
+                        <div class="text-center mt-2">
+                            <a class="btn btn-dark" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à
+                                página inicial</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+</div>
+</div>
 {% endblock %}
