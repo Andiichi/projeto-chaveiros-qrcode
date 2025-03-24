@@ -6,7 +6,7 @@ Login
 {% endblock %}
 
 
- 
+    
     <!-- Navigation -->
     {% include 'navbar.html' %}
 
@@ -24,6 +24,7 @@ Login
                         <div class="text-center">
                             <h1 class=" text-gray-900 mb-4 display-6">Faça seu login!</h1>
                         </div>
+                        
                         <form method="POST" action="{% url 'auth_app:entrar' %}" class="user">
 
                             {% csrf_token %}

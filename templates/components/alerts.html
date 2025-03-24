@@ -1,25 +1,21 @@
+{% for message in messages %}
+{% if 'success' in message.tags %} <!-- se for sucesso -->
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Mensagem do sistema:</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
-    <div class="alerta">
-        {% for message in messages %}
-        {% if 'success' in message.tags %} <!-- se for sucesso -->
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Mensagem do sistema:</strong> {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+{% elif 'error' in message.tags %} <!-- se for error -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Mensagem do sistema:</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
-        {% elif 'error' in message.tags %} <!-- se for error -->
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Mensagem do sistema:</strong> {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+{% else %} <!-- outros erros -->
+<div class="alert alert-dark alert-dismissible fade show" role="alert">
+    <strong>Mensagem do sistema:</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
-        {% else %} <!-- outros erros -->
-        <div class="alert alert-dark alert-dismissible fade show" role="alert">
-            <strong>Mensagem do sistema:</strong> {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        {% endif %}
-        {% endfor %}
-    </div>
- 
+{% endif %}
+{% endfor %}

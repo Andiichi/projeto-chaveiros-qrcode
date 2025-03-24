@@ -3,6 +3,11 @@
 
 {% block title %}Cadastro{% endblock %}
 
+
+    <!-- Navigation -->
+    {% include 'navbar.html' %}
+
+    
 {% block content %}
 
 <!-- <div class="d-flex justify-content-center align-items-center vh-100" style="margin-top: 60px;">
@@ -59,6 +64,7 @@
     </div>
 </div> -->
 
+    
 
 <div class="container">
     <!-- Outer Row -->
@@ -68,12 +74,14 @@
                 <div class="card-body p-0">
                     <!-- Card Body -->
                     <div class="p-5">
-                        {% if messages %}
-                                {% include './components/alerts.html' %}
-                        {% endif %}
-
                         <div class="text-center">
-                            <h1 class=" text-gray-900 mb-4 display-6">Faça seu cadastro!</h1>
+                            <h1 class="text-gray-900 mb-4 display-6">Faça seu cadastro!</h1>
+                        </div>
+                        <!-- Div para alertas logo abaixo do título -->
+                        <div class="alert-container">
+                            {% if messages %}
+                            {% include './components/alerts.html' %}
+                            {% endif %}
                         </div>
                         <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" class="user">
                             <div class="form-group row">

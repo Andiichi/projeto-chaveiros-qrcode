@@ -8,3 +8,4 @@ setTimeout(function() {
         setTimeout(() => alert.remove(), 500); // Remove a div após desaparecer
     });
 }, 5000); // 5000ms = 5 segundos
+
