@@ -66,6 +66,13 @@
 
     
 
+<!-- Div para alertas logo abaixo do título -->
+<div class="alerta">
+    {% if messages %}
+    {% include './components/alerts.html' %}
+    {% endif %}
+</div>
+
 <div class="container">
     <!-- Outer Row -->
     <div class="row justify-content-center">

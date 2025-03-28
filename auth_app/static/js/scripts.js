@@ -9,3 +9,13 @@ setTimeout(function() {
     });
 }, 5000); // 5000ms = 5 segundos
 
+// Toggle sidebar
+document.getElementById('sidebarToggle').addEventListener('click', function() {
+    document.getElementById('accordionSidebar').classList.toggle('collapsed');
+    document.getElementById('sidebarToggle').classList.toggle('collapsed');
+});
+
+// Mobile sidebar toggle
+document.getElementById('sidebarToggleTop').addEventListener('click', function() {
+    document.getElementById('accordionSidebar').classList.toggle('mobile-show');
+});
