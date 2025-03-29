@@ -12,10 +12,13 @@ Login
 {% block content %}
 
 
+{% include 'navbar.html' %}
+
+
 <!-- Div para alertas logo abaixo do título -->
 <div class="alerta">
     {% if messages %}
-    {% include './components/alerts.html' %}
+    {% include 'components/alerts.html' %}
     {% endif %}
 </div>
 
@@ -52,7 +55,7 @@ Login
                         </div>
                         <hr>
                         <div class="text-center mt-2">
-                            <a class="btn btn-dark" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
+                            <a class="btn btn-dark" href="{% url 'chaveiros:pagina_inicial' %}" role="button">Voltar à página inicial</a>
                         </div>
                     </div>
                 </div>

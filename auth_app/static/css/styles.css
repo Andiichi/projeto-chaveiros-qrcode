@@ -39,17 +39,17 @@ div.alerta {
 
 
 /* sidebar */
-
+/* 
 :root {
     --sidebar-width: 380px;
     --sidebar-width-collapsed: 90px;
 }
-
+*/
 .sidebar {
     width: var(--sidebar-width);
-    height: 100vh;
+    height: 0vh;
     transition: all 0.3s ease;
-} */
+}  
 
 .sidebar.collapsed {
     width: var(--sidebar-width-collapsed);

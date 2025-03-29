@@ -10,68 +10,8 @@
     
 {% block content %}
 
-<!-- <div class="d-flex justify-content-center align-items-center vh-100" style="margin-top: 60px;">
-    <div class="container bg-dark text-white rounded-3 p-5" style="max-width: 500px;">
-        <h1 class="text-center mb-4 display-6">Crie sua conta!</h1>
 
-        <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            <div class="mb-3">
-                <label for="first_name" class="form-label">Nome:</label>
-                <input type="text" name="first_name" id="first_name" class="form-control" required>
-            </div>
-            
-            <div class="mb-3">
-                <label for="last_name" class="form-label">Sobrenome:</label>
-                <input type="text" name="last_name" id="last_name" class="form-control" required>
-            </div>
-            
-            <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" name="email" id="email" class="form-control" required>
-            </div>
-            
-            
-            <div class="mb-3">
-                <label for="codigo_secreto" class="form-label">Código Secreto:</label>
-                <input type="text" name="codigo_secreto" id="codigo_secreto" class="form-control" value="{{ codigo }}" readonly>
-            </div>
-            
-            <div class="mb-3">
-                <label for="grupo" class="form-label">Grupo:</label>
-                <input type="text" name="grupo" id="grupo" class="form-control" value="{{ grupo }}" readonly>
-            </div>
-            
-            <div class="mb-3">
-                <label for="password1" class="form-label">Senha:</label>
-                <input type="password" name="password1" id="password1" class="form-control" required>
-            </div>
-            
-            <div class="mb-3">
-                <label for="password2" class="form-label">Confirme sua senha:</label>
-                <input type="password" name="password2" id="password2" class="form-control" required>
-            </div>
-            
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
-            </div>
-        </form>
-
-        <div class="text-center mt-3">
-            <a class="btn btn-light" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à página inicial</a>
-        </div>
-    </div>
-</div> -->
-
-    
-
-<!-- Div para alertas logo abaixo do título -->
-<div class="alerta">
-    {% if messages %}
-    {% include './components/alerts.html' %}
-    {% endif %}
-</div>
+{% include 'navbar.html' %}
 
 <div class="container">
     <!-- Outer Row -->
@@ -84,58 +24,95 @@
                         <div class="text-center">
                             <h1 class="text-gray-900 mb-4 display-6">Faça seu cadastro!</h1>
                         </div>
+
                         <!-- Div para alertas logo abaixo do título -->
                         <div class="alert-container">
                             {% if messages %}
-                            {% include './components/alerts.html' %}
+                            {% include 'components/alerts.html' %}
                             {% endif %}
                         </div>
+
                         <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" class="user">
+                            {% csrf_token %}
+
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="first_name" class="form-label pl-4 small">Nome:</label>
-                                    <input type="text" name="first_name" id="first_name"
-                                        class="form-control form-control-user pl-4" placeholder="Digite seu nome...">
+                                    <input 
+                                    type="text" 
+                                    name="first_name" 
+                                    id="first_name"
+                                    class="form-control form-control-user pl-4" 
+                                    placeholder="Digite seu nome..."
+                                    required>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="last_name" class="form-label pl-4 small">Sobrenome:</label>
-                                    <input type="text" name="last_name" id="last_name"
-                                        class="form-control form-control-user" placeholder="Digite seu sobrenome...">
+                                    <input 
+                                    type="text" 
+                                    name="last_name" 
+                                    id="last_name"
+                                    class="form-control form-control-user" 
+                                    placeholder="Digite seu sobrenome..."
+                                    required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="mb-3">
                                     <label for="email" class="form-label pl-4 small">Email:</label>
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Digite seu email...">
+                                    <input 
+                                    type="email" 
+                                    name="email" 
+                                    id="email" 
+                                    class="form-control form-control-user"
+                                    placeholder="Digite seu email..."
+                                    required>
 
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="codigo_secreto" class="form-label pl-4 small">Código Secreto:</label>
-                                    <input type="text" name="codigo_secreto" id="codigo_secreto"
-                                        class="form-control form-control-user" value="{{ codigo }}" readonly>
+                                    <input 
+                                    type="text" 
+                                    name="codigo_secreto" 
+                                    id="codigo_secreto"
+                                    class="form-control form-control-user" 
+                                    value="{{ codigo }}" 
+                                    readonly>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="grupo" class="form-label pl-4 small">Grupo:</label>
-                                    <input type="text" name="grupo" id="grupo" class="form-control form-control-user"
-                                        value="{{ grupo }}" readonly>
+                                    <input 
+                                    type="text" 
+                                    name="grupo" 
+                                    id="grupo" 
+                                    class="form-control form-control-user"
+                                    value="{{ grupo }}" 
+                                    readonly>
                                 </div>
 
                             </div>
-
-
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="password" class="form-label pl-4 small">Senha:</label>
-                                    <input type="password" class="form-control form-control-user"
-                                        id="exampleInputPassword" placeholder="Digite sua senha...">
+                                    <input 
+                                    type="password" 
+                                    id="password"
+                                    name="password" 
+                                    class="form-control form-control-user"
+                                    placeholder="Digite sua senha..."
+                                    required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="password" class="form-label pl-4 small">Confirme a senha:</label>
-                                    <input type="password" class="form-control form-control-user"
-                                        id="exampleRepeatPassword" placeholder="Repetir a sua senha...">
+                                    <label for="confirm_password" class="form-label pl-4 small">Confirme a senha:</label>
+                                    <input 
+                                    type="password" 
+                                    id="confirm_password" 
+                                    name="confirm_password"
+                                    class="form-control form-control-user"
+                                    placeholder="Repetir a sua senha..."
+                                    required>
                                 </div>
                             </div>
 
@@ -151,7 +128,7 @@
                         </div>
                         <hr>
                         <div class="text-center mt-2">
-                            <a class="btn btn-dark" href="{% url 'auth_app:pagina_inicial' %}" role="button">Voltar à
+                            <a class="btn btn-dark" href="{% url 'chaveiros:pagina_inicial' %}" role="button">Voltar à
                                 página inicial</a>
                         </div>
                     </div>

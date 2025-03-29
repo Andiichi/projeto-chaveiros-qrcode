@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'auth_app',
     'validarcodigo_app',
+    'chaveiros',
     'bootstrap5',
 ]
 

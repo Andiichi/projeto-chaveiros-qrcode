@@ -24,8 +24,11 @@ def cadastro(request, codigo):
     if request.method == 'POST':
         email = request.POST.get('email').strip()
         password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
         first_name = request.POST.get('first_name').strip()
         last_name = request.POST.get('last_name').strip()
+
+
 
         # Verifica se o e-mail já está cadastrado
         if User.objects.filter(email=email).exists():
@@ -106,4 +109,8 @@ def admin_logout(request):
 
 @login_required(login_url='auth_app:entrar')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'dashboard/dashboard.html')
+
+@login_required(login_url='auth_app:entrar')
+def dashboard_inicio(request):
+    return render(request, 'dashboard/dashboard.html')
