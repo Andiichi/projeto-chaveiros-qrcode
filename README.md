@@ -2,7 +2,8 @@
 
 Este é um projeto para a criação de um sistema de gerenciamento de chaveiros com QR Code. O sistema permite que os usuários gerenciem chaveiros personalizados, validem códigos QR e acessem informações relacionadas.
 
-##  Em constução ainda...
+
+---
 
 ## Tecnologias Utilizadas
 
@@ -32,7 +33,7 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 
    ```bash
    python -m venv venv
-   source venv/bin/activate  # No Windows: venv\Scripts\activate
+   venv\Scripts\activate  # No Linux: source venv/bin/activate 
    ```
 
 3. Instale as dependências:
@@ -41,23 +42,24 @@ Certifique-se de ter as seguintes ferramentas instaladas:
    pip install -r requirements.txt
    ```
 
-4. Aplique as migrações do banco de dados:
+4. Faça as migrações do banco de dados:
+
+   ```bash
+   python manage.py makemigrations
+   ```
+
+5. Aplique as migrações do banco de dados:
 
    ```bash
    python manage.py migrate
    ```
 
-5. Inicie o servidor de desenvolvimento:
+6. Inicie o servidor de desenvolvimento:
 
    ```bash
    python manage.py runserver
    ```
 
-6. Acesse o sistema no navegador:
-
-   ```
-   http://127.0.0.1:8000/
-   ```
 
 ## Como Contribuir
 
@@ -67,8 +69,13 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 4. Envie para o repositório remoto: `git push origin minha-feature`.
 5. Abra um Pull Request.
 
+
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
+
+
+
+##  Em constução ainda...
