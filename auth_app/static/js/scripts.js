@@ -19,3 +19,8 @@ document.getElementById('sidebarToggle').addEventListener('click', function() {
 document.getElementById('sidebarToggleTop').addEventListener('click', function() {
     document.getElementById('accordionSidebar').classList.toggle('mobile-show');
 });
+
+// popovers do modal criacao de chaveiros
+document.querySelectorAll('[data-bs-toggle="popover"]').forEach((popover) => {
+    new bootstrap.Popover(popover);
+  });

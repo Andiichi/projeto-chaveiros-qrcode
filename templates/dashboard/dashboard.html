@@ -392,9 +392,6 @@ Dashboard
       </div>
     </div>
   </div>
-
-
-
   <!-- Modal de Criação de Chaveiro -->
   <div class="modal fade" id="criarChaveiroModal" tabindex="-1" aria-labelledby="criarChaveiroModalLabel"
     aria-hidden="true">
@@ -407,7 +404,7 @@ Dashboard
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="post" action="#!">
+          <form method="post" action="#">
             <p class="small text-center">
               Dados obrigatórios para encontrar os responsáveis ou o contato
               de emergencia da pessoa que usará o chaveiro com o QRcode!
@@ -423,30 +420,41 @@ Dashboard
               </div>
             </div>
 
-            <div class="row g-3 mb-4">
-              <div class="col-md-6">
-                <label for="nomeChaveiro" class="form-label">Data de nascimento</label>
-                <input type="date" class="form-control" class="form-control" />
-              </div>
+            <div class="mb-4">
+              <label for="inputDataNascimento" class="form-label">Data de Nascimento</label>
+              <input type="date" class="form-control" id="inputDataNascimento" name="data_nascimento" required>
             </div>
+
+            <!-- <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <label for="nomeChaveiro" class="form-label"
+                    >Data de nascimento</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    class="form-control"
+                  />
+                </div>
+              </div> -->
 
             <div class="row  mb-4">
               <p class="small fw-bolder">Contato de Emergência ou dos Responsáveis:</p>
               <div class="col-md-6">
-                <label for="contato1" class="form-label">Contato 1</label>
+                <label for="contato1" class="form-label">Telefone</label>
                 <div class="row">
                   <div class="col-auto">
-                    <input type="text" class="form-control" id="ddd1" name="ddd1" pattern="\d{2}" maxlength="2" required
+                    <input type="text" class="form-control" id="ddd1" name="ddd1" pattern="\d{2}" maxlength="2"
                       style="max-width: 50px;">
                   </div>
                   <div class="col">
-                    <input type="tel" class="form-control" id="phone1" name="phone1" pattern="\d{5}-\d{4}" required>
+                    <input type="tel" class="form-control" id="phone1" name="phone1" pattern="\d{5}-\d{4}">
                   </div>
                 </div>
-                <p class="small fst-italic">Formato válido: DDD 99999-9999</p>
+                <p class="small fst-italic mt-2">Formato válido: 51 98888-9999</p>
               </div>
               <div class="col-md-6">
-                <label for="contato2" class="form-label">Contato 2</label>
+                <label for="contato2" class="form-label">Celular/WhatsApp</label>
                 <div class="row">
                   <div class="col-auto">
                     <input type="text" class="form-control" id="ddd2" name="ddd2" pattern="\d{2}" maxlength="2" required
@@ -458,93 +466,111 @@ Dashboard
                 </div>
               </div>
             </div>
-            <!-- <p class="small fw-bolder">
-                Contato de Emergência ou dos Responsáveis:
-              </p>
-              <div class="row g-3 mb-4">
-              <div class="col-md-6">
-                <label for="contato1" class="form-label">Contato 1</label>
-                <div class="input-group">
-                  
-                  <input type="text" class="form-control" id="ddd1" name="ddd1" pattern="\d{2}" maxlength="2" required style="max-width: 60px;">
-                  <input type="tel" class="form-control" id="phone1" name="phone1" pattern="\d{5}-\d{4}" placeholder="99999-9999" required>
-                </div>
-                <p class="small fst-italic mt-2">Formato válido: 51 98888-9999</p>
-              </div>
-              <div class="col-md-6">
-                <label for="contato2" class="form-label">Contato 2</label>
-               
-                <div class="row g-3 mb-4">
-                <div class="col">
-                  <input type="text" class="form-control" id="ddd2" name="ddd2" pattern="\d{2}" maxlength="2" required style="max-width: 30px;">
-                  <input type="tel" class="form-control" id="phone2" name="phone2" pattern="\d{5}-\d{4}" placeholder="99999-9999" required>
-                </div>
-              </div>
-              </div>
-            </div> -->
 
             <!-- Accordion para Dados Opcionais -->
-            <div class="accordion mb-3" id="accordionDadosOpcionais">
+
+            <div class="accordion mb-3" id="accordionExample">
               <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseDadosOpcionais" aria-expanded="false"
-                    aria-controls="collapseDadosOpcionais">
+                <h2 class="accordion-header ">
+                  <button class="accordion-button collapsed bg-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     Dados Opcionais
                   </button>
                 </h2>
-                <div id="collapseDadosOpcionais" class="accordion-collapse collapse"
-                  data-bs-parent="#accordionDadosOpcionais">
+                <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
                   <div class="accordion-body">
+
                     <p class="small text-center">
                       Dados opcionais que serão inseridos junto com os dados
                       obrigatorios acima no chaveiro QRcode!
                     </p>
                     <div class="mb-3">
-                      <label for="emailChaveiro" class="form-label">Email (Opcional)</label>
+                      <label for="emailChaveiro" class="form-label">Email </label>
                       <input type="email" class="form-control" id="emailChaveiro" name="email" />
                     </div>
                     <div class="mb-3">
-                      <label for="enderecoChaveiro" class="form-label">Endereço (Opcional)</label>
+                      <label for="enderecoChaveiro" class="form-label">Endereço </label>
                       <input type="text" class="form-control" id="enderecoChaveiro" name="endereco" />
                     </div>
+
                     <div class="mb-3">
-                      <label for="tipoSanguineo" class="form-label">Tipo Sanguíneo (Opcional)</label>
-                      <input type="text" class="form-control" id="tipoSanguineo" name="tipo_sanguineo" />
+                      <label for="tipoSanguineo" class="form-label">Tipo Sanguíneo </label>
+                      <select class="form-select" aria-label="Default select example">
+                        <option class="text-center" selected>----</option>
+                        <option value="1">A+</option>
+                        <option value="2">A−</option>
+                        <option value="3">B+</option>
+                        <option value="4">B−</option>
+                        <option value="5">AB+</option>
+                        <option value="6">AB−</option>
+                        <option value="7">O+</option>
+                        <option value="8">O−</option>
+                      </select>
                     </div>
+
                     <div class="mb-3">
-                      <label for="alergias" class="form-label">Alergias e Intolerâncias (Opcional)</label>
-                      <textarea class="form-control" id="alergias" name="alergias"></textarea>
+                      <div class="input-group">
+                        <span class="input-group-text">Alergias e Intolerâncias</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                      </div>
                     </div>
+
                     <div class="mb-3">
-                      <label for="medicacoes" class="form-label">Medicações (Opcional)</label>
-                      <textarea class="form-control" id="medicacoes" name="medicacoes"></textarea>
+                      <div class="input-group">
+                        <span class="input-group-text">Medicações</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                      </div>
                     </div>
+
                     <div class="mb-3">
-                      <label for="whatsappLink" class="form-label">Link para WhatsApp (Opcional)</label>
-                      <input type="url" class="form-control" id="whatsappLink" name="whatsapp_link" />
+                      <div class="d-inline-flex flex-row gap-2">
+                        <label class="form-check-label mb-2" for="flexSwitchCheckDefault">Link para WhatsApp ?</label>
+                        <div class="form-check form-switch p-0">
+                          <input class="form-check-input ms-0" type="checkbox" role="switch" id="switchCheckLabelStart"
+                            checked />
+                        </div>
+                      </div>
+                      <div class="form-text" id="basic-addon4">Selecionando será colocado o número inserido no campo 'Celuar/WhatsApp.'</div>
                     </div>
-                    <div class="mb-3">
-                      <label for="socialLink" class="form-label">Link do Instagram/Facebook (Opcional)</label>
-                      <input type="url" class="form-control" id="socialLink" name="social_link" />
+
+                    <div class="mb-3 mt-3">
+                      <p class="fw-bolder">Redes sociais
+
+                      </p>
+                      <label for="basic-url" class="form-label">Insira seu usuário abaixo:</label>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">https://www.instagram.com/</span>
+                        <input type="text" class="form-control" id="basic-url"
+                          aria-describedby="basic-addon3 basic-addon4">
+                      </div>
                     </div>
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3">https://www.facebook.com/</span>
+                      <input type="text" class="form-control" id="basic-url"
+                        aria-describedby="basic-addon3 basic-addon4">
+                    </div>
+                    <div class="form-text" id="basic-addon4">Pode adicionar qualquer um, é opcional.</div>
                   </div>
+
+
                 </div>
               </div>
             </div>
-
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Cancelar
               </button>
-              <button type="submit" class="btn btn-primary">Criar</button>
+              <button type="submit" class="btn btn-success">Criar</button>
             </div>
-          </form>
         </div>
+
+        </form>
       </div>
     </div>
 
   </div>
+
+
 
   <!-- End Example Code -->
 
