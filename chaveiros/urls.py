@@ -8,6 +8,8 @@ app_name = 'chaveiros'  # Definição do namespace para a aplicação de autenti
 
 urlpatterns = [
     path('pagina-inicial/', TemplateView.as_view(template_name='pagina-inicial.html'), name='pagina_inicial'),
-    path('dashboard/', TemplateView.as_view(template_name='dashboard/dashboard.html'), name='dashboard'),
+    path('dashboard/perfil', TemplateView.as_view(template_name='dashboard/dashboard_profile.html'), name='perfil'),
+    path('dashboard/editar-perfil', TemplateView.as_view(template_name='dashboard/dashboard_profile_editar.html'), name='perfil-editar'),
+    path('dashboard/', TemplateView.as_view(template_name='dashboard/dashboard_principal.html'), name='dashboard'),
     path('dashboard/listagem', TemplateView.as_view(template_name='dashboard/dashboard_listagem.html'), name='dashboard_listagem')
 ]

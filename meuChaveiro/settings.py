@@ -76,7 +76,7 @@ ROOT_URLCONF = 'meuChaveiro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-         'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Adiciona o diretório templates na raiz do projeto
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

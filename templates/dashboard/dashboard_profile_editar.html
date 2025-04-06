@@ -1,0 +1,358 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load custom_filters %}
+
+{% load static %}
+
+{% block title %}
+Editar perfil
+{% endblock %}
+
+{% block content %}
+
+            <!-- Content Row -->
+            <div class="row">
+
+                <!-- Main Card -->
+                <div class="col-lg-12 col-md-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Editar perfil</h6>
+                        </div>
+                        <div class="card-body">
+                            <!-- <p class="mb-4">Bem-vindo ao seu painel de controle. Aqui você pode gerenciar seus
+                                    chaveiros virtuais, comprar créditos e configurar sua conta.</p> -->
+                            <div class="row">
+                                <div class="card mb-3 p-3 mx-auto" style="max-width: 740px">
+                                    <div class="row g-0 d-flex flex-md-row flex-column align-items-start mt-4">
+
+                                        <!-- Imagem do perfil -->
+                                        <div class="col-md-4 pt-4 text-center">
+                                            <img src="{{ user.foto_profile.url }}"
+                                                class="img-fluid rounded" alt="Foto de perfil" style="width: 150px">
+
+                                            <div class="col-sm my-2">
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                    Alterar foto
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Informações do usuário -->
+                                        <div class="col-md-8 d-flex flex-column justify-content-start h-100">
+                                            <div class="card-body pt-2">
+                                                <form method="post" enctype="multipart/form-data" >
+                                                    {% csrf_token %}
+
+
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <h5 class="card-title m-1 display-6">Seus dados:</h5>
+
+                                                    </div>
+                                                    <p class="card-text">
+
+                                                    <ul class="list-unstyled ">
+
+                                                        <li>
+
+                                                            <div class="row g-3 my-1">
+                                                                <div class="col-auto">
+                                                                    <label for="stateList" class="col-form-label">
+                                                                        <h6 class="mt-0"><strong>Nome:</strong></strong></h6>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-7">
+                                                                    <input type="text" name="first_name"
+                                                                        class="form-control"
+                                                                        value="{{ user.first_name }}">
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <label for="stateList" class="col-form-label">
+                                                                            <h6 class="mt-0"><strong>Sobrenome:</strong></strong></h6>
+                                                                        </label>
+
+                                                                    </div>
+                                                                        <div class="col-sm-7">
+                                                                            
+                                                                    <input type="text" name="last_name"
+                                                                        class="form-control"
+                                                                        value="{{ user.last_name }}">
+                                                                    <!-- <input type="text" class="form-control"
+                                                                        placeholder="Rua" aria-label="City"
+                                                                        value="{{ user.first_name }} {{ user.last_name }}"> -->
+                                                            </div>
+
+                                                        </li>
+
+                                                        <li>
+
+                                                            <div class="row g-3 my-1">
+                                                                <div class="col-auto">
+                                                                    <label for="stateList" class="col-form-label">
+                                                                        <h6 class="mt-0">
+                                                                            <strong>Email:</strong></strong>
+                                                                        </h6>
+                                                                    </label>
+
+                                                                </div>
+                                                                <div class="col-sm-7">
+                                                                    <input type="text" class="form-control"
+                                                                        aria-label="email" value="{{ user.email }}"
+                                                                        disabled>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+
+                                                        <li>
+                                                            <div class="row g-3 my-1">
+
+                                                                <div class="col-sm">
+                                                                    <form method="post">
+                                                                        {% csrf_token %}
+                                                                    
+                                                                        {{ phone_formset.management_form }}
+                                                                    
+                                                                        <div id="phones-formset">
+                                                                            {{ form.number }}
+                                                                            {% for form in phone_formset %}
+                                                                                <div class="phone-form row g-2 mb-2">
+                                                                                    <div class="col-sm-10">
+                                                                                        {{ form.number }}
+                                                                                    </div>
+                                                                                    <div class="col-sm-2 d-flex align-items-center">
+                                                                                        {% if form.instance.pk %}
+                                                                                            <input type="checkbox" name="{{ form.prefix }}-DELETE" class="form-check-input me-2"> Remover
+                                                                                        {% endif %}
+                                                                                    </div>
+                                                                                </div>
+                                                                            {% endfor %}
+                                                                        </div>
+                                                                    
+                                                                        <button type="button" class="btn btn-outline-primary" id="add-phone">+ Adicionar telefone</button>
+                                                                    
+                                                                        <button type="submit" class="btn btn-success mt-3">Salvar</button>
+                                                                    </form>
+                                                            </div>
+                                                            </div>
+
+
+                                                        </li>
+
+                                                        <li>
+                                                            <div class="row g-3 my-1">
+
+                                                                <div class="col-sm">
+                                                                    <label for="stateList" class="col-form-label">
+                                                                        <h6 class="mt-0"><strong>Data de
+                                                                                nascimento:</strong></strong></h6>
+                                                                    </label>
+                                                                    <!-- <input type="date" class="form-control"
+                                                                        class="form-control"
+                                                                        value="{{ user.data_nascimento | default:'' }}" /> -->
+                                                                        <input type="date" name="data_nascimento" class="form-control" value="{{ user.data_nascimento|date:'Y-m-d' }}">
+
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label for="stateList" class="col-form-label">
+                                                                        <h6 class="mt-0">
+                                                                            <strong>Idade:</strong></strong>
+                                                                        </h6>
+                                                                    </label>
+                                                                    <input class="form-control" type="number"
+                                                                        id="quantity" placeholder="Insira sua idade"
+                                                                        name="quantity"
+                                                                        value="{{ user.idade | default:'-' }} " min="16"
+                                                                        max="100">
+                                                                </div>
+
+                                                            </div>
+
+                                                        </li>
+
+
+                                                        <li>
+                                                            <div class="row g-3 my-1">
+                                                                <div class="col-auto">
+                                                                    <label for="stateList" class="col-form-label">
+                                                                        <h6 class="mt-0">
+                                                                            <strong>Endereço:</strong></strong>
+                                                                        </h6>
+                                                                    </label>
+
+                                                                </div>
+                                                                <div class="col-sm-7">
+                                                                    <input type="text" name="endereco" class="form-control" value="{{ user.endereco }}">
+
+                                                                </div>
+                                                                <!-- <div class="col-sm">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Nº" aria-label="State"
+                                                                        value="{{ user.endereco | default:'' }}">
+                                                                </div> -->
+
+                                                            </div>
+
+
+                                                        </li>
+
+                                                        <li>
+
+                                                            <!-- <div class="row g-3 align-items-center my-1">
+                                                                <div class="col-auto">
+                                                                    <label for="stateList" class="col-form-label">
+                                                                        <h6 class="mt-0">
+                                                                            <strong>Cidade:</strong></strong>
+                                                                        </h6>
+                                                                    </label>
+
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <input type="text" id="text3" class="form-control"
+                                                                        aria-describedby="text" placeholder="Cidade"
+                                                                        value="{{ user.endereco | default:'' }}">
+                                                                </div>
+                                                            </div> -->
+
+                                                        </li>
+
+                                                        <li>
+                                                            <div class="row g-3 align-items-center my-1">
+                                                                <div class="col-auto">
+                                                                    <label for="stateList" class="col-form-label">
+                                                                        <h6 class="mt-0"><strong>UF:</strong></h6>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <select id="stateList" class="form-select">
+                                                                        <option value="">Selecione um estado</option>
+                                                                        <option value="AC">Acre (AC)</option>
+                                                                        <option value="AL">Alagoas (AL)</option>
+                                                                        <option value="AP">Amapá (AP)</option>
+                                                                        <option value="AM">Amazonas (AM)</option>
+                                                                        <option value="BA">Bahia (BA)</option>
+                                                                        <option value="CE">Ceará (CE)</option>
+                                                                        <option value="DF">Distrito Federal (DF)
+                                                                        </option>
+                                                                        <option value="ES">Espírito Santo (ES)</option>
+                                                                        <option value="GO">Goiás (GO)</option>
+                                                                        <option value="MA">Maranhão (MA)</option>
+                                                                        <option value="MT">Mato Grosso (MT)</option>
+                                                                        <option value="MS">Mato Grosso do Sul (MS)
+                                                                        </option>
+                                                                        <option value="MG">Minas Gerais (MG)</option>
+                                                                        <option value="PA">Pará (PA)</option>
+                                                                        <option value="PB">Paraíba (PB)</option>
+                                                                        <option value="PR">Paraná (PR)</option>
+                                                                        <option value="PE">Pernambuco (PE)</option>
+                                                                        <option value="PI">Piauí (PI)</option>
+                                                                        <option value="RJ">Rio de Janeiro (RJ)</option>
+                                                                        <option value="RN">Rio Grande do Norte (RN)
+                                                                        </option>
+                                                                        <option value="RS">Rio Grande do Sul (RS)
+                                                                        </option>
+                                                                        <option value="RO">Rondônia (RO)</option>
+                                                                        <option value="RR">Roraima (RR)</option>
+                                                                        <option value="SC">Santa Catarina (SC)</option>
+                                                                        <option value="SP">São Paulo (SP)</option>
+                                                                        <option value="SE">Sergipe (SE)</option>
+                                                                        <option value="TO">Tocantins (TO)</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                        <!-- <li>
+                                                            <div class="row g-3 align-items-center my-1">
+                                                                <div class="col-auto">
+                                                                    <label for="inputPassword6" class="col-form-label">
+                                                                        <h6 class="mt-0"><strong>Complemento:</strong>
+                                                                        </h6>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <input type="text" id="text3" class="form-control"
+                                                                        aria-describedby="text"
+                                                                        placeholder="Complemento"
+                                                                        value="{{ user.endereco | default:'' }}">
+                                                                </div>
+                                                            </div>
+                                                        </li> -->
+
+                                                    </ul>
+
+
+                                                    <label for="bio" class="form-label mt-1">
+                                                        <h6 class="mt-0"><strong>Sua bio:</strong></h6>
+                                                    </label>
+                                                    <!-- <textarea class="form-control" id="bio" name="bio" rows="5"
+                                                        placeholder="Digite uma biografia sua aqui...">{{ user.bio | default:"" }}</textarea> -->
+                                                        <textarea name="bio" class="form-control" rows="5" placeholder="Digite uma biografia sua aqui...">{{ user.bio }}</textarea>
+
+                                                    </p>
+
+                                                    <div class="row my-3">
+                                                        <div class="col text-end">
+                                                            <a href="{% url 'chaveiros:perfil' %}"
+                                                                class="btn btn-danger me-2">Cancelar</a>
+                                                                <button type="submit" class="btn btn-success">Salvar alterações</button>
+                                                        </div>
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Modal -->
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                Insira uma nova foto
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">Selecione uma foto:</label>
+                                                <input class="form-control" type="file" id="formFile">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-danger"
+                                                data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary">Confirmar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class=" mt-3">
+
+                </div>
+
+                <!-- <a href="#" class="btn btn-primary btn-icon-split">
+                              <span class="icon text-white-50">
+                                  <i class="fas fa-plus"></i>
+                              </span>
+                              <span class="text">Criar Novo Chaveiro</span>
+                          </a> -->
+            </div>
+
+
+{% endblock %}

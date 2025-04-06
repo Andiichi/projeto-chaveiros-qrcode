@@ -1,0 +1,300 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load static %}
+
+
+{% block title %}
+Area do Cliente
+{% endblock %}
+
+
+{% block content %} 
+
+
+
+  <!-- Content Row -->
+  <div class="row">
+
+    <!-- Main Card -->
+    <div class="col-lg-12 col-md-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Informações</h6>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <!-- <div class="col-md-6 mb-4">
+                            <div class="card border-left-primary h-100 py-2">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-key fa-2x text-gray-300 mr-3"></i>
+                                        <div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Chaveiros Criados
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+            <div class="col-md-6 mb-4">
+              <div class="card border-left-primary h-100 py-2">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-key fa-2x text-gray-300 mr-3"></i>
+                    <div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Chaveiros Criados
+
+                      </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                    </div>
+                    <a href="{% url 'chaveiros:dashboard_listagem' %}"
+                      class="small mt-5 font-weight-bold text-gray-500 italic">Clique
+                      para visualizar</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <div class="card border-left-success h-100 py-2">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-coins fa-2x text-gray-300 mr-3"></i>
+                    <div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        Créditos Disponíveis
+                      </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                    </div>
+                    <a href="!#" class="small mt-5 font-weight-bold text-gray-500 italic">Clique para
+                      visualizar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="mb-4">Bem-vindo ao seu painel de controle. Aqui você pode gerenciar seus
+            chaveiros virtuais, comprar créditos e configurar sua conta.</p>
+          <div class=" mt-3">
+            <a type="button" class=" btn btn-primary btn-icon-split" data-bs-toggle="modal"
+              data-bs-target="#criarChaveiroModal">
+              <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+              </span>
+              <span class="text">Criar Novo Chaveiro</span>
+            </a>
+          </div>
+
+          <!-- <a href="#" class="btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">Criar Novo Chaveiro</span>
+                    </a> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Card de Links Rápidos -->
+    <!-- <div class="col-lg-3">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Links Rápidos</h6>
+        </div>
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <a href="#" class="btn btn-outline-primary text-left">
+              <i class="fas fa-cog mr-2"></i> Configurações
+            </a>
+            <a href="#" class="btn btn-outline-primary text-left">
+              <i class="fa fa-key mr-2"></i> Trocar Senha
+            </a>
+            <a href="#" class="btn btn-outline-success text-left">
+              <i class="fas fa-shopping-cart mr-2"></i> Comprar Créditos
+            </a>
+            <a href="#" class="btn btn-outline-info text-left">
+              <i class="fas fa-question-circle mr-2"></i> Ajuda
+            </a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+
+<!-- End of Main Content -->
+
+
+
+
+
+  <!-- Modal de Criação de Chaveiro -->
+  <div class="modal fade" id="criarChaveiroModal" tabindex="-1" aria-labelledby="criarChaveiroModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="criarChaveiroModalLabel">
+            Criar Novo Chaveiro
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="#">
+            <p class="small text-center">
+              Dados obrigatórios para encontrar os responsáveis ou o contato
+              de emergencia da pessoa que usará o chaveiro com o QRcode!
+            </p>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="nomeChaveiro" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nomeChaveiro" name="nome" required />
+              </div>
+              <div class="col-md-6">
+                <label for="nomeChaveiro" class="form-label">Sobrenome</label>
+                <input type="text" class="form-control" id="nomeChaveiro" name="nome" required />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="inputDataNascimento" class="form-label">Data de Nascimento</label>
+              <input type="date" class="form-control" id="inputDataNascimento" name="data_nascimento" required>
+            </div>
+
+            <div class="row  mb-4">
+              <p class="small fw-bolder">Contato de Emergência ou dos Responsáveis:</p>
+              <div class="col-md-6">
+                <label for="contato1" class="form-label">Telefone</label>
+                <div class="row">
+                  <div class="col-auto">
+                    <input type="text" class="form-control" id="ddd1" name="ddd1" pattern="\d{2}" maxlength="2"
+                      style="max-width: 50px;">
+                  </div>
+                  <div class="col">
+                    <input type="tel" class="form-control" id="phone1" name="phone1" pattern="\d{5}-\d{4}">
+                  </div>
+                </div>
+                <p class="small fst-italic mt-2">Formato válido: 51 98888-9999</p>
+              </div>
+              <div class="col-md-6">
+                <label for="contato2" class="form-label">Celular/WhatsApp</label>
+                <div class="row">
+                  <div class="col-auto">
+                    <input type="text" class="form-control" id="ddd2" name="ddd2" pattern="\d{2}" maxlength="2" required
+                      style="max-width: 50px;">
+                  </div>
+                  <div class="col">
+                    <input type="tel" class="form-control" id="phone2" name="phone2" pattern="\d{5}-\d{4}" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion para Dados Opcionais -->
+
+            <div class="accordion mb-3" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header ">
+                  <button class="accordion-button collapsed bg-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Dados Opcionais
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+
+                    <p class="small text-center">
+                      Dados opcionais que serão inseridos junto com os dados
+                      obrigatorios acima no chaveiro QRcode!
+                    </p>
+                    <div class="mb-3">
+                      <label for="emailChaveiro" class="form-label">Email </label>
+                      <input type="email" class="form-control" id="emailChaveiro" name="email" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="enderecoChaveiro" class="form-label">Endereço </label>
+                      <input type="text" class="form-control" id="enderecoChaveiro" name="endereco" />
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="tipoSanguineo" class="form-label">Tipo Sanguíneo </label>
+                      <select class="form-select" aria-label="Default select example">
+                        <option class="text-center" selected>----</option>
+                        <option value="1">A+</option>
+                        <option value="2">A−</option>
+                        <option value="3">B+</option>
+                        <option value="4">B−</option>
+                        <option value="5">AB+</option>
+                        <option value="6">AB−</option>
+                        <option value="7">O+</option>
+                        <option value="8">O−</option>
+                      </select>
+                    </div>
+
+                    <div class="mb-3">
+                      <div class="input-group">
+                        <span class="input-group-text">Alergias e Intolerâncias</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <div class="input-group">
+                        <span class="input-group-text">Medicações</span>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <div class="d-inline-flex flex-row gap-2">
+                        <label class="form-check-label mb-2" for="flexSwitchCheckDefault">Link para WhatsApp ?</label>
+                        <div class="form-check form-switch p-0">
+                          <input class="form-check-input ms-0" type="checkbox" role="switch" id="switchCheckLabelStart"
+                            checked />
+                        </div>
+                      </div>
+                      <div class="form-text" id="basic-addon4">Selecionando será colocado o número inserido no campo 'Celuar/WhatsApp.'</div>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                      <p class="fw-bolder">Redes sociais
+
+                      </p>
+                      <label for="basic-url" class="form-label">Insira seu usuário abaixo:</label>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">https://www.instagram.com/</span>
+                        <input type="text" class="form-control" id="basic-url"
+                          aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3">https://www.facebook.com/</span>
+                      <input type="text" class="form-control" id="basic-url"
+                        aria-describedby="basic-addon3 basic-addon4">
+                    </div>
+                    <div class="form-text" id="basic-addon4">Pode adicionar qualquer um, é opcional.</div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-success">Criar</button>
+            </div>
+        </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+{% endblock %}

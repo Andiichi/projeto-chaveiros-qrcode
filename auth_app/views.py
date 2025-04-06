@@ -67,7 +67,7 @@ def user_login(request):
         if user is not None:
             login(request, user)
             messages.success(request, f'Bem-vindo, {user.first_name}!')
-            return redirect('auth_app:dashboard')
+            return redirect('chaveiros:dashboard')
         else:
             messages.error(request, 'Credenciais inválidas. Tente novamente.')
 
@@ -100,12 +100,9 @@ def alterar_senha(request):
 @login_required(login_url='auth_app:entrar')
 def logout_view(request):
     logout(request)
-    next_url = request.GET.get('next', 'auth_app:pagina_inicial')  # Redireciona para a página inicial ou outro destino
+    next_url = request.GET.get('next', 'chaveiros:pagina_inicial')  # Redireciona para a página inicial ou outro destino
     return redirect(next_url)
 
-def admin_logout(request):
-    logout(request)
-    return redirect('/admin/login/')
 
 @login_required(login_url='auth_app:entrar')
 def dashboard(request):
