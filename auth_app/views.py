@@ -57,6 +57,9 @@ def cadastro(request, codigo):
 
 
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('chaveiros:dashboard')  # nome da sua URL do dashboard
+    
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')

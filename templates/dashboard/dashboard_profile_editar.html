@@ -27,8 +27,16 @@ Editar perfil
 
                                         <!-- Imagem do perfil -->
                                         <div class="col-md-4 pt-4 text-center">
-                                            <img src="{{ user.foto_profile.url }}"
-                                                class="img-fluid rounded" alt="Foto de perfil" style="width: 150px">
+                                            {% if request.user.foto_profile %}
+                                            <img src="{{ user.foto_profile.url }}" class="img-fluid rounded" alt="Foto de perfil"
+                                                style="width: 150px">
+                                            
+                                            {% else %}
+                                            <img src="{% static 'images/avatar-default.jpg' %}" class="img-fluid rounded" alt="Foto de perfil"
+                                                style="width: 150px">
+                                           
+                                            {% endif %}
+                                           
 
                                             <div class="col-sm my-2">
                                                 <button type="button" class="btn btn-primary btn-sm"

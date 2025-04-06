@@ -16,7 +16,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_staff')  # Adicionando o campo 'photo' ao list_display
     search_fields = ('email', 'first_name')
     ordering = ('email',)
-    readonly_fields = ('first_name', 'last_name', 'email', 'data_nascimento')  # Remova 'username' se não existir
+    readonly_fields = ('first_name', 'last_name', 'email')  # Remova 'username' se não existir
 
     fieldsets = (
         ('Dados de acesso', {'fields': ('email', 'password', 'is_active')}),
