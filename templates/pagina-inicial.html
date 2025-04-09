@@ -13,6 +13,12 @@ Página Inicial
 {% include 'navbar.html' %}
 
     
+  <!-- Div para alertas logo abaixo do título -->
+  <div class="alerta">
+    {% if messages %}
+    {% include 'components/alerts.html' %}
+    {% endif %}
+  </div>
 
 <div class="container mt-lg-5">
     <div class="row justify-content-center">

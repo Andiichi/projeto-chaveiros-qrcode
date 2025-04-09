@@ -31,7 +31,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #5ba3fb;">
 
 
   <!-- Div para alertas logo abaixo do título -->
@@ -77,11 +77,23 @@
           <span>Configurações</span></a>
       </li>
 
+
       <li class="nav-item active">
         <a class="nav-link" href="">
-          <i class="fas fa-fw fa-question-circle"></i>
-          <span>Ajuda</span></a>
+          <i class="fa fa-video-camera fa-fw"></i>
+          <span>Vídeos tutoriais! </span>
+          <span
+            class=" position-absolute mx-3 top-0 start-80 translate-middle-x translate-middle badge rounded-pill bg-danger">
+            Novo!
+          </span>
+          </span>
+        </a>
       </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -93,37 +105,23 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-          aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSite" aria-expanded="true"
+          aria-controls="collapseSite">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          <span>Voltar ao site</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseSite" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
+            <h6 class="collapse-header">Menu do site:</h6>
+            <a class="collapse-item" href="{% url 'chaveiros:pagina_inicial' %}">Página inicial</a>
+            <a class="collapse-item" href="#!">Preços</a>
+            <a class="collapse-item" href="#!">Como funciona?</a>
+            <a class="collapse-item" href="#!">Contato</a>
+            <a class="collapse-item" href="#!">Comprar</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-          aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -131,12 +129,12 @@
 
 
       <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
+      <div class="text-center  d-md-inline alerta_compra-card" id="sidebar">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
 
       <!-- Sidebar Message -->
-      <div class="sidebar-card d-none d-lg-flex">
+      <div class="sidebar-card">
         <img class="sidebar-card-illustration mb-2" src="{% static 'images/undraw_rocket.svg' %}" alt="...">
         <p class="text-center mb-2"><strong>Faça sua compra!</strong> Para criar novos chaveiros é necessário
           comprar um novo crédito no nosso site.</p>
@@ -224,6 +222,57 @@
               </div>
             </li>
 
+            <!-- collapse para ajuda e suporte -->
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="ajudaDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-question-circle"></i>
+                
+              </a>
+
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="ajudaDropdown">
+                <h6 class="dropdown-header">
+                  Central de ajuda
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa fa-envelope text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    Enviar um email para o suporte. 
+                    
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa fa-mobile text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <!-- Counter - Alerts -->
+                    Entre em contato </br> pelo WhatsApp!
+                    <span class="badge badge-danger badge-counter">Novo!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa fa-question text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    Acesse nosso FAQ.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Abrir central de ajuda</a>
+              </div>
+            </li>
+
             <div class="topbar-divider d-none d-sm-block"></div>
 
 
@@ -237,7 +286,7 @@
                 {% else %}
                 <img class="img-profile rounded-circle" src="{% static 'images/avatar-default.jpg' %}">
                 {% endif %}
-                
+
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -287,6 +336,8 @@
 
         <!-- End of Footer -->
       </div>
+      <!-- End of Main Content -->
+
     </div>
     <!-- End of Content Wrapper -->
   </div>

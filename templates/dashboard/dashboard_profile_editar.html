@@ -159,7 +159,7 @@ Editar perfil
                                                                     <!-- <input type="date" class="form-control"
                                                                         class="form-control"
                                                                         value="{{ user.data_nascimento | default:'' }}" /> -->
-                                                                        <input type="date" name="data_nascimento" class="form-control" value="{{ user.data_nascimento|date:'Y-m-d' }}">
+                                                                        <input type="date" name="data_nascimento" class="form-control" value="{{ user.data_nascimento|date:'Y-m-d' }}" required>
 
                                                                 </div>
                                                                 <div class="col-sm-3">

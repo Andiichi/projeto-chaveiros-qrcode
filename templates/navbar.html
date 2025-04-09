@@ -2,7 +2,7 @@
 {% load bootstrap5 %}
 
 <nav class="navbar navbar-expand-lg bg-primary sticky-top">
-  <div class="container-fluid p-4">
+  <div class="container-fluid">
 
     <!-- Toggle button -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
@@ -27,24 +27,23 @@
       </ul>
     </div>
 
-    <!-- Avatar à direita (visível se logado) -->
     {% if user.is_authenticated %}
+    <!-- Avatar à direita (visível se logado) -->
     <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="{{ user.photo.url }}" width="36" height="36" class="rounded-circle border p-1"
-            onerror="this.onerror=null;this.src='/static/img/default-profile.png';" alt="Avatar do usuário" />
+      <li class="nav-item ">
+        <a class="btn nav-link d-flex align-items-center" href="{% url 'chaveiros:dashboard' %}" >
+            {% if user.foto_profile %}
+            <img src="{{ user.foto_profile.url }}" width="36" height="36" class="rounded-circle border p-1" alt="Avatar do usuário" />
+            {% else %}
+            <img src="{% static 'images/avatar-default.jpg' %}" width="36" height="36" class="rounded-circle border p-1" alt="Avatar do usuário" />
+            {% endif %}
+        {% else %} 
+        <div class="d-flex gap-2">
+          <a href="{% url 'auth_app:entrar' %}" class="btn btn-outline-light">Login</a>
+          <a href="{% url 'validar-codigo' %}" class="btn btn-outline-light">Cadastrar</a>
+        </div>
+        {% endif %}
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <li><a class="dropdown-item" href="#">Perfil</a></li>
-          <li><a class="dropdown-item" href="#">Configurações</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-danger" href="#">Sair</a></li>
-        </ul>
-      </li>
-    </ul>
-    {% endif %}
-
+        
   </div>
 </nav>

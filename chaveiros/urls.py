@@ -3,13 +3,18 @@ from django.urls import path
 from auth_app.views import *
 
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+
 
 app_name = 'chaveiros'  # Definição do namespace para a aplicação de autenticação
 
 urlpatterns = [
+    #Rotas comuns do site
     path('pagina-inicial/', TemplateView.as_view(template_name='pagina-inicial.html'), name='pagina_inicial'),
-    path('dashboard/perfil', TemplateView.as_view(template_name='dashboard/dashboard_profile.html'), name='perfil'),
-    path('dashboard/editar-perfil', TemplateView.as_view(template_name='dashboard/dashboard_profile_editar.html'), name='perfil-editar'),
-    path('dashboard/', TemplateView.as_view(template_name='dashboard/dashboard_principal.html'), name='dashboard'),
-    path('dashboard/listagem', TemplateView.as_view(template_name='dashboard/dashboard_listagem.html'), name='dashboard_listagem')
+
+    # Rotas do Dashboard
+    path('dashboard/', login_required(TemplateView.as_view(template_name='dashboard/dashboard_principal.html')), name='dashboard'),
+    path('dashboard/listagem', login_required(TemplateView.as_view(template_name='dashboard/dashboard_listagem.html')), name='dashboard_listagem'),
+    path('dashboard/perfil', login_required(TemplateView.as_view(template_name='dashboard/dashboard_profile.html')), name='perfil'),
+    path('dashboard/editar-perfil', login_required(TemplateView.as_view(template_name='dashboard/dashboard_profile_editar.html')), name='perfil-editar'),
 ]

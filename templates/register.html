@@ -4,10 +4,10 @@
 {% block title %}Cadastro{% endblock %}
 
 
-    <!-- Navigation -->
-    {% include 'navbar.html' %}
+<!-- Navigation -->
+{% include 'navbar.html' %}
 
-    
+
 {% block content %}
 
 
@@ -32,88 +32,82 @@
                             {% endif %}
                         </div>
 
-                        <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" class="user">
+                        <form method="POST" action="{% url 'auth_app:cadastro' codigo=codigo %}" class="user"
+                            enctype="multipart/form-data">
                             {% csrf_token %}
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="first_name" class="form-label pl-4 small">Nome:</label>
-                                    <input 
-                                    type="text" 
-                                    name="first_name" 
-                                    id="first_name"
-                                    class="form-control form-control-user pl-4" 
-                                    placeholder="Digite seu nome..."
-                                    required>
+                                    <input type="text" name="first_name" id="first_name"
+                                        class="form-control form-control-user pl-4" placeholder="Digite seu nome..."
+                                        required>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="last_name" class="form-label pl-4 small">Sobrenome:</label>
-                                    <input 
-                                    type="text" 
-                                    name="last_name" 
-                                    id="last_name"
-                                    class="form-control form-control-user" 
-                                    placeholder="Digite seu sobrenome..."
-                                    required>
+                                    <input type="text" name="last_name" id="last_name"
+                                        class="form-control form-control-user" placeholder="Digite seu sobrenome..."
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="">
+                                    <label for="data_nascimento" class="form-label pl-4 small">Data de
+                                        nascimento</label>
+                                    <input type="date" name="data_nascimento" id="data_nascimento"
+                                        class="form-control form-control-user" required />
+                                    <label class="small text-danger pl-4">*Precisa ser maior de 18 anos para efetuar o
+                                        cadastro.</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="mb-3">
                                     <label for="email" class="form-label pl-4 small">Email:</label>
-                                    <input 
-                                    type="email" 
-                                    name="email" 
-                                    id="email" 
-                                    class="form-control form-control-user"
-                                    placeholder="Digite seu email..."
-                                    required>
+                                    <input type="email" name="email" id="email" class="form-control form-control-user"
+                                        placeholder="Digite seu email..." required>
 
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="codigo_secreto" class="form-label pl-4 small">Código Secreto:</label>
-                                    <input 
-                                    type="text" 
-                                    name="codigo_secreto" 
-                                    id="codigo_secreto"
-                                    class="form-control form-control-user" 
-                                    value="{{ codigo }}" 
-                                    readonly>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="grupo" class="form-label pl-4 small">Grupo:</label>
-                                    <input 
-                                    type="text" 
-                                    name="grupo" 
-                                    id="grupo" 
-                                    class="form-control form-control-user"
-                                    value="{{ grupo }}" 
-                                    readonly>
-                                </div>
 
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="password" class="form-label pl-4 small">Senha:</label>
-                                    <input 
-                                    type="password" 
-                                    id="password"
-                                    name="password" 
-                                    class="form-control form-control-user"
-                                    placeholder="Digite sua senha..."
-                                    required>
+                                    <input type="password" id="password" name="password"
+                                        class="form-control form-control-user" placeholder="Digite sua senha..."
+                                        required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="confirm_password" class="form-label pl-4 small">Confirme a senha:</label>
-                                    <input 
-                                    type="password" 
-                                    id="confirm_password" 
-                                    name="confirm_password"
-                                    class="form-control form-control-user"
-                                    placeholder="Repetir a sua senha..."
-                                    required>
+                                    <label for="confirm_password" class="form-label pl-4 small">Confirme a
+                                        senha:</label>
+                                    <input type="password" id="confirm_password" name="confirm_password"
+                                        class="form-control form-control-user" placeholder="Repetir a sua senha..."
+                                        required>
                                 </div>
+                            </div>
+
+                            
+                            <div class="mb-3">
+                                <label for="codigo_secreto" class="form-label pl-4 small">Código Secreto:</label>
+                                <input type="text" name="codigo_secreto" id="codigo_secreto"
+                                    class="form-control form-control-user" value="{{ codigo }}" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="grupo" class="form-label pl-4 small">Grupo:</label>
+                                <input type="text" name="grupo" id="grupo" class="form-control form-control-user"
+                                    value="{{ grupo }}" readonly>
+                            </div>
+                            
+                            <!-- Lembrar -->
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="lembrar" id="lembrar">
+                                <label class="form-check-label" for="lembrar">Lembre-me</label>
+                            </div>
+                            <!-- autorização maior de 18 anos -->
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="+18" id="+18" required>
+                                <label class="form-check-label" for="+18">Confirmo que sou +18 anos. </label>
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-user btn-block">Cadastrar</button>

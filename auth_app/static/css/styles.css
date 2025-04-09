@@ -17,11 +17,12 @@ div.fundo {
 }
 
 div.alerta {
-   position: fixed; 
-   top: 30px; 
-   right: 20px; 
-   z-index: 1050;
-} 
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1050;
+ } 
+   
 
 
 .hover-bold {

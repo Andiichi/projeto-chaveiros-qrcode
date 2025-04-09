@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 import os
 
 
@@ -28,6 +29,8 @@ SECRET_KEY = 'django-insecure-l)k@c4df_-f6qfkh@xc2b#vr!r7+^%7(h!q%4*h+c4t&&8p%8u
 DEBUG = True
 
 AUTH_USER_MODEL = 'auth_app.User'  # Define o modelo de usuário personalizado
+
+LOGIN_URL = reverse_lazy('auth_app:entrar')  # ou a URL que você usa para login
 
 ALLOWED_HOSTS = []
 
@@ -68,6 +71,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'meuChaveiro.middlewares.SeparateSessionMiddleware',  # Middleware para separar sessões de usuários comuns e administradores
+    'meuChaveiro.middlewares.LoginRequiredMessageMiddleware', # Middleware para mensagens de login
   
 ]
 

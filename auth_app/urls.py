@@ -10,6 +10,5 @@ urlpatterns = [
     path('register/<str:codigo>/', cadastro, name='cadastro'), # URL para o registro com código
     path('login/', user_login, name='entrar'),
     path('logout/', logout_view, name='sair'), # URL para o logout com código
-    path('admin-login/', admin_login, name='admin_login'),
     path('alterar_senha/', alterar_senha, name='alterar_senha')
 ]
