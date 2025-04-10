@@ -1,17 +1,28 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.views.generic.edit import UpdateView
-from .models import User
-from .forms import UserUpdateForm
+from django.contrib.auth import get_user_model
+from django.contrib.sessions.models import Session
+from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import redirect
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-    model = User
-    form_class = UserUpdateForm
-    template_name = 'user_update.html'
-    success_url = reverse_lazy('profile')  # ou qualquer página que quiser redirecionar após o update
+# 📄 Página de dashboard para o usuário comum
+def dashboard(request):
+    if request.user.is_authenticated:
+        return redirect(request, 'chaveiros:dashboard')
+    return HttpResponse('Você precisa estar logado.')
 
-    def get_object(self, queryset=None):
-        return self.request.user  # atualiza os dados do usuário logado
-    
+
+# 📄 Dashboard exclusivo para admin (usando admin_sessionid)
+def admin_dashboard(request):
+    session_key = request.COOKIES.get('admin_sessionid')
+    if session_key:
+        try:
+            session = Session.objects.get(session_key=session_key)
+            user_id = session.get_decoded().get('_auth_user_id')
+            user = get_user_model().objects.get(id=user_id)
+            if user.is_staff:
+                return HttpResponse(f'Admin logado como: {user.username}')
+        except:
+            pass
+    return HttpResponse('Acesso negado para admin.')
     

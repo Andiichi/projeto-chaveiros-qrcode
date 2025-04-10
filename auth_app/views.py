@@ -7,6 +7,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.utils import timezone
 from django.db import transaction
+from django.http import HttpResponse
 from .models import User
 from validarcodigo_app.models import  CodigoSecreto
 from datetime import datetime
@@ -42,11 +43,11 @@ def cadastro(request, codigo):
         whatsapp = request.POST.get('whatsapp', '')
         lembrar = request.POST.get('lembrar')
 
-        tipo_sanguineo = request.POST.get('tipo_sanguineo', '')
-        alergias = request.POST.get('alergias_intolerancias', '')
-        medicamentos = request.POST.get('medicamentos', '')
-        link_whatsapp = request.POST.get('link_whatsapp', '')
-        links_outros = request.POST.get('links_outros', '')
+        # tipo_sanguineo = request.POST.get('tipo_sanguineo', '')
+        # alergias = request.POST.get('alergias_intolerancias', '')
+        # medicamentos = request.POST.get('medicamentos', '')
+        # link_whatsapp = request.POST.get('link_whatsapp', '')
+        # links_outros = request.POST.get('links_outros', '')
 
         # Validação da senha
         if password != confirm_password:
@@ -81,21 +82,21 @@ def cadastro(request, codigo):
                     whatsapp=whatsapp,
                 )
 
-                if foto_profile:
-                    user.foto_profile = foto_profile
-                    user.save()
+                # if foto_profile:
+                #     user.foto_profile = foto_profile
+                #     user.save()
 
                 if grupo:
                     user.groups.add(grupo)
 
-                DadosOpcionais.objects.create(
-                    usuario=user,
-                    tipo_sanguineo=tipo_sanguineo,
-                    alergias_intolerancias=alergias,
-                    medicamentos=medicamentos,
-                    link_whatsapp=link_whatsapp,
-                    links_outros=links_outros
-                )
+                # DadosOpcionais.objects.create(
+                #     usuario=user,
+                #     tipo_sanguineo=tipo_sanguineo,
+                #     alergias_intolerancias=alergias,
+                #     medicamentos=medicamentos,
+                #     link_whatsapp=link_whatsapp,
+                #     links_outros=links_outros
+                # )
 
                 secret_code.used = True
                 secret_code.used_at = timezone.now()
