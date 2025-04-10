@@ -7,10 +7,8 @@ Perfil
 {% endblock %}
 
 {% block content %}
-
 <!-- Content Row -->
 <div class="row">
-
     <!-- Main Card -->
     <div class="col-lg-12 col-md-12">
         <div class="card shadow mb-4">
@@ -18,24 +16,18 @@ Perfil
                 <h6 class="m-0 font-weight-bold text-primary">Perfil</h6>
             </div>
             <div class="card-body">
-                <!-- <p class="mb-4">Bem-vindo ao seu painel de controle. Aqui você pode gerenciar seus
-                                    chaveiros virtuais, comprar créditos e configurar sua conta.</p> -->
                 <div class="row">
                     <div class="card mb-3 p-3 mx-auto" style="max-width: 740px">
                         <div class="row g-0 d-flex flex-md-row flex-column align-items-start mt-4">
-
                             <!-- Imagem do perfil -->
                             <div class="col-md-4 pt-4 text-center">
-                                {% if request.user.foto_profile %}
+                                {% if user.foto_profile %}
                                 <img src="{{ user.foto_profile.url }}" class="img-fluid rounded" alt="Foto de perfil"
                                     style="width: 150px">
-                                
                                 {% else %}
-                                <img src="{% static 'images/avatar-default.jpg' %}" class="img-fluid rounded" alt="Foto de perfil"
-                                    style="width: 150px">
-                               
+                                <img src="{% static 'images/avatar-default.jpg' %}" class="img-fluid rounded"
+                                    alt="Foto de perfil" style="width: 150px">
                                 {% endif %}
-                                
                             </div>
 
                             <!-- Informações do usuário -->
@@ -43,240 +35,50 @@ Perfil
                                 <div class="card-body pt-2">
 
                                     <div class="d-flex align-items-center gap-2">
-                                        <h5 class="card-title m-1 display-6">{{ user.first_name }} {{ user.last_name }}
+                                        <h5 class="card-title display-6">{{ user.first_name }} {{ user.last_name }}
                                         </h5>
                                         <a href="{% url 'chaveiros:perfil-editar' %}"
-                                            class="btn btn-outline-primary btn-sm">Editar
-                                            Perfil</a>
+                                            class="btn btn-outline-primary btn-sm">Editar Perfil</a>
                                     </div>
-
-                                    <h6 class="my-3"><strong>Seus dados</strong></h6>
-                                    <ul class="list-unstyled ">
-                                        <li><strong>Email:</strong> {{ user.email }}</li>
-                                        <li><strong>Idade:</strong> {{ user.idade | default:"-" }} </li>
-                                        <li><strong>Data de nascimento:</strong> {{ user.data_nascimento | default:"-"
-                                            }}</li>
-                                        <li><strong>Endereço:</strong> {{ user.endereco | default:"-" }}
-                                            <strong>Número:</strong> {{ user.endereco | default:"-" }}
-                                        </li>
-                                        <li><strong>Cidade:</strong> {{ user.endereco | default:"-" }} </li>
-                                        <li><strong>UF:</strong> {{ user.endereco | default:"-" }}</li>
-                                        <li><strong>Complemento:</strong> {{ user.endereco | default:"-" }}
-                                        </li>
-                                    </ul>
-
+                                    
                                     <h6 class="mt-5"><strong>Sua bio:</strong></h6>
                                     <p class="card-text">
-                                        {{ user.bio | default:"---" }}
+                                        {{ user.bio|default:"---" }}
                                     </p>
+
+
+                                    <h6 class="my-3  display-6"><strong>Seus dados</strong></h6>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Email:</strong> {{ user.email }}</li>
+                                        <li><strong>Idade:</strong> {{ user.idade|default:"-" }}</li>
+                                        <li><strong>Data de nascimento:</strong> {{ user.data_nascimento|date:"d/m/Y" }}
+                                        </li>
+                                        <li>
+                                            <strong>Endereço:</strong> {{ user.endereco|default:"-" }},
+                                            <strong>Número:</strong> {{ user.numero_endereco|default:"-" }},
+                                            <strong>Complemento:</strong> {{ user.complemento|default:"-" }}
+                                        </li>
+                                        <li><strong>Cidade:</strong> {{ user.cidade|default:"-" }}</li>
+                                        <li><strong>UF:</strong> {{ user.estado|default:"-" }}</li>
+                                        <li><strong>Telefone:</strong> {{ user.telefone|default:"-" }}</li>
+                                        <li><strong>WhatsApp:</strong> {{ user.whatsapp|default:"-" }}</li>
+                                        <br>
+                                        <li><strong>Criado em:</strong> {{ user.created_at|date:"d/m/Y H:i" }}</li>
+                                        
+                                    </ul>
 
                                 </div>
                             </div>
+
                         </div>
 
-                        <p class="text-body-secondary small text-end m-4"><em>Última atualização há
-                                <strong>3 minutos</strong></em></p>
+                        <p class="text-body-secondary small text-end m-4">
+                            <em>Última atualização há <strong>{{ user.updated_at|timesince }}</strong> atrás</em>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class=" mt-3">
-
-            </div>
-
-            <!-- <a href="#" class="btn btn-primary btn-icon-split">
-                              <span class="icon text-white-50">
-                                  <i class="fas fa-plus"></i>
-                              </span>
-                              <span class="text">Criar Novo Chaveiro</span>
-                          </a> -->
         </div>
     </div>
 </div>
-
-<!-- Modal de Criação de Chaveiro -->
-<div class="modal fade" id="criarChaveiroModal" tabindex="-1" aria-labelledby="criarChaveiroModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="criarChaveiroModalLabel">
-                    Criar Novo Chaveiro
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="#">
-                    <p class="small text-center">
-                        Dados obrigatórios para encontrar os responsáveis ou o contato
-                        de emergencia da pessoa que usará o chaveiro com o QRcode!
-                    </p>
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                            <label for="nomeChaveiro" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nomeChaveiro" name="nome" required />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nomeChaveiro" class="form-label">Sobrenome</label>
-                            <input type="text" class="form-control" id="nomeChaveiro" name="nome" required />
-                        </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="inputDataNascimento" class="form-label">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="inputDataNascimento" name="data_nascimento"
-                            required>
-                    </div>
-
-                    <!-- <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                  <label for="nomeChaveiro" class="form-label"
-                    >Data de nascimento</label
-                  >
-                  <input
-                    type="date"
-                    class="form-control"
-                    class="form-control"
-                  />
-                </div>
-              </div> -->
-
-                    <div class="row  mb-4">
-                        <p class="small fw-bolder">Contato de Emergência ou dos Responsáveis:</p>
-                        <div class="col-md-6">
-                            <label for="contato1" class="form-label">Telefone</label>
-                            <div class="row">
-                                <div class="col-auto">
-                                    <input type="text" class="form-control" id="ddd1" name="ddd1" pattern="\d{2}"
-                                        maxlength="2" style="max-width: 50px;">
-                                </div>
-                                <div class="col">
-                                    <input type="tel" class="form-control" id="phone1" name="phone1"
-                                        pattern="\d{5}-\d{4}">
-                                </div>
-                            </div>
-                            <p class="small fst-italic mt-2">Formato válido: 51 98888-9999</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="contato2" class="form-label">Celular/WhatsApp</label>
-                            <div class="row">
-                                <div class="col-auto">
-                                    <input type="text" class="form-control" id="ddd2" name="ddd2" pattern="\d{2}"
-                                        maxlength="2" required style="max-width: 50px;">
-                                </div>
-                                <div class="col">
-                                    <input type="tel" class="form-control" id="phone2" name="phone2"
-                                        pattern="\d{5}-\d{4}" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Accordion para Dados Opcionais -->
-
-                    <div class="accordion mb-3" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header ">
-                                <button class="accordion-button collapsed bg-primary" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                                    aria-controls="collapseOne">
-                                    Dados Opcionais
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse "
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-
-                                    <p class="small text-center">
-                                        Dados opcionais que serão inseridos junto com os dados
-                                        obrigatorios acima no chaveiro QRcode!
-                                    </p>
-                                    <div class="mb-3">
-                                        <label for="emailChaveiro" class="form-label">Email </label>
-                                        <input type="email" class="form-control" id="emailChaveiro" name="email" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="enderecoChaveiro" class="form-label">Endereço </label>
-                                        <input type="text" class="form-control" id="enderecoChaveiro" name="endereco" />
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="tipoSanguineo" class="form-label">Tipo Sanguíneo </label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option class="text-center" selected>----</option>
-                                            <option value="1">A+</option>
-                                            <option value="2">A−</option>
-                                            <option value="3">B+</option>
-                                            <option value="4">B−</option>
-                                            <option value="5">AB+</option>
-                                            <option value="6">AB−</option>
-                                            <option value="7">O+</option>
-                                            <option value="8">O−</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="input-group">
-                                            <span class="input-group-text">Alergias e Intolerâncias</span>
-                                            <textarea class="form-control" aria-label="With textarea"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="input-group">
-                                            <span class="input-group-text">Medicações</span>
-                                            <textarea class="form-control" aria-label="With textarea"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="d-inline-flex flex-row gap-2">
-                                            <label class="form-check-label mb-2" for="flexSwitchCheckDefault">Link
-                                                para WhatsApp ?</label>
-                                            <div class="form-check form-switch p-0">
-                                                <input class="form-check-input ms-0" type="checkbox" role="switch"
-                                                    id="switchCheckLabelStart" checked />
-                                            </div>
-                                        </div>
-                                        <div class="form-text" id="basic-addon4">Selecionando será colocado o número
-                                            inserido no campo 'Celuar/WhatsApp.'</div>
-                                    </div>
-
-                                    <div class="mb-3 mt-3">
-                                        <p class="fw-bolder">Redes sociais
-
-                                        </p>
-                                        <label for="basic-url" class="form-label">Insira seu usuário abaixo:</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"
-                                                id="basic-addon3">https://www.instagram.com/</span>
-                                            <input type="text" class="form-control" id="basic-url"
-                                                aria-describedby="basic-addon3 basic-addon4">
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-text"
-                                            id="basic-addon3">https://www.facebook.com/</span>
-                                        <input type="text" class="form-control" id="basic-url"
-                                            aria-describedby="basic-addon3 basic-addon4">
-                                    </div>
-                                    <div class="form-text" id="basic-addon4">Pode adicionar qualquer um, é opcional.
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-                        <button type="submit" class="btn btn-success">Criar</button>
-                    </div>
-            </div>
-
-            </form>
-        </div>
-
-
-        {% endblock %}
+{% endblock %}
