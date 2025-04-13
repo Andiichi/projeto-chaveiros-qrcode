@@ -62,6 +62,7 @@ class User(AbstractUser):
     telefone = models.CharField(max_length=15, blank=True, verbose_name='telefone_chaveiro')
     whatsapp = models.CharField(max_length=15, blank=True, verbose_name='whatsapp_chaveiro')
     data_nascimento = models.DateField(null=False, blank=False)
+    bio = models.TextField(blank=True, null=True, verbose_name='biografia')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
