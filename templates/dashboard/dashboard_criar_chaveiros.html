@@ -1,0 +1,157 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load custom_filters %}
+
+{% load static %}
+
+{% block title %}
+Criar chaveiros
+{% endblock %}
+
+{% block content %}
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Main Card -->
+    <div class="col-lg-12 col-md-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Criar chaveiros</h6>
+            </div>
+
+            <div class="container mt-2">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10 col-lg-12">
+                        <div class="card  border-0 rounded-4">
+                            <div class="card-body p-4">
+
+                                </head>
+
+                                <body>
+
+                                    <div class="container mt-5">
+                                        <div class="form-container">
+                                            <h2 class="mb-4 text-center">Cadastro de Chaveiro</h2>
+                                            <form method="POST" enctype="multipart/form-data">
+                                                {% csrf_token %}
+
+                                                <!-- DADOS OBRIGATÓRIOS -->
+                                                <h4 class="mb-3">Dados Pessoais</h4>
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label for="nome" class="form-label">Nome</label>
+                                                        <input type="text" class="form-control" name="nome_chaveiro"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="sobrenome" class="form-label">Sobrenome</label>
+                                                        <input type="text" class="form-control"
+                                                            name="sobrenome_chaveiro" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="telefone" class="form-label">Telefone</label>
+                                                        <input type="text" class="form-control"
+                                                            name="telefone_chaveiro">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="whatsapp" class="form-label">WhatsApp</label>
+                                                        <input type="text" class="form-control"
+                                                            name="whatsapp_chaveiro">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="nascimento" class="form-label">Data de
+                                                            Nascimento</label>
+                                                        <input type="date" class="form-control"
+                                                            name="data_nascimento_chaveiro" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- DADOS OPCIONAIS -->
+                                                <hr class="my-4">
+                                                <h4 class="mb-3">Informações Opcionais</h4>
+                                                <div class="row g-3">
+                                                    <div class="col-md-12">
+                                                        <label for="foto" class="form-label">Foto</label>
+                                                        <input type="file" class="form-control" name="foto_chaveiros">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label for="endereco" class="form-label">Endereço</label>
+                                                        <input type="text" class="form-control" name="endereco">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="numero" class="form-label">Número</label>
+                                                        <input type="text" class="form-control" name="numero_endereco">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="complemento" class="form-label">Complemento</label>
+                                                        <input type="text" class="form-control" name="complemento">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="cidade" class="form-label">Cidade</label>
+                                                        <input type="text" class="form-control" name="cidade">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="estado" class="form-label">Estado</label>
+                                                        <select name="estado" class="form-select">
+                                                            <option value="#">Escolha um estado:</option>
+                                                            {% for sigla, nome in estado %}
+                                                                <option value="{{ sigla }}" {% if dados_opcionais.user.estado == sigla %}selected{% endif %}>{{ nome }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="email" class="form-label">E-mail</label>
+                                                        <input type="email" class="form-control" name="email" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="sangue" class="form-label">Tipo Sanguíneo</label>
+                                                        <select class="form-select" name="tipo_sanguineo">
+                                                            <option value="">Selecione...</option>
+                                                            {% for tipo, label in form.fields.tipo_sanguineo.choices %}
+                                                            <option value="{{ tipo }}">{{ label }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="alergias" class="form-label">Alergias /
+                                                            Intolerâncias</label>
+                                                        <textarea class="form-control" name="alergias_intolerancias"
+                                                            rows="2"></textarea>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="medicamentos"
+                                                            class="form-label">Medicamentos</label>
+                                                        <textarea class="form-control" name="medicamentos"
+                                                            rows="2"></textarea>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="link_whatsapp" class="form-label">Link do
+                                                            WhatsApp</label>
+                                                        <input type="url" class="form-control" name="link_whatsapp">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="links_outros" class="form-label">Outros
+                                                            Links</label>
+                                                        <input type="url" class="form-control" name="links_outros">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mt-4 text-center">
+                                                    <button type="submit" class="btn btn-primary px-5">Salvar
+                                                        Chaveiro</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

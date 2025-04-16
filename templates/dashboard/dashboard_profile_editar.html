@@ -42,12 +42,7 @@ Editar perfil
                                                 style="width: 220px;">
                                             {% endif %}
                                             <div class="col-sm my-2">
-                                                <!-- <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="formFile" class="form-label">Selecione uma foto:</label>
-                                                        <input class="form-control" type="file" id="foto_profile" name="foto_profile">
-                                                    </div>
-                                                </div> -->
+                                               
                                                 <button type="button" class="btn btn-primary btn-sm rounded-4"
                                                 data-bs-toggle="modal" data-bs-target="#modalFotoPerfil">
                                                 <i class="fas a fa-pencil  fa-sm fa-fw "></i>  Alterar foto
@@ -266,7 +261,7 @@ Editar perfil
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <select name="estado" class="form-select">
-                                                                        {% for sigla, nome in estados %}
+                                                                        {% for sigla, nome in estado %}
                                                                             <option value="{{ sigla }}" {% if user.estado == sigla %}selected{% endif %}>{{ nome }}</option>
                                                                         {% endfor %}
                                                                     </select>
