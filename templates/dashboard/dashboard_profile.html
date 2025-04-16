@@ -13,71 +13,173 @@ Perfil
     <div class="col-lg-12 col-md-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Perfil</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Seu perfil</h6>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="card mb-3 p-3 mx-auto" style="max-width: 740px">
-                        <div class="row g-0 d-flex flex-md-row flex-column align-items-start mt-4">
-                            <!-- Imagem do perfil -->
-                            <div class="col-md-4 pt-4 text-center">
-                                {% if user.foto_profile %}
-                                <img src="{{ user.foto_profile.url }}" class="img-fluid rounded" alt="Foto de perfil"
-                                    style="width: 150px">
-                                {% else %}
-                                <img src="{% static 'images/avatar-default.jpg' %}" class="img-fluid rounded"
-                                    alt="Foto de perfil" style="width: 150px">
-                                {% endif %}
-                            </div>
 
-                            <!-- Informações do usuário -->
-                            <div class="col-md-8 d-flex flex-column justify-content-start h-100">
-                                <div class="card-body pt-2">
+            <div class="container mt-2">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10 col-lg-12">
+                        <div class="card  border-0 rounded-4">
+                            <div class="card-body p-4">
 
-                                    <div class="d-flex align-items-center gap-2">
-                                        <h5 class="card-title display-6">{{ user.first_name }} {{ user.last_name }}
-                                        </h5>
-                                        <a href="{% url 'chaveiros:perfil-editar' %}"
-                                            class="btn btn-outline-primary btn-sm">Editar Perfil</a>
-                                    </div>
-                                    
-                                    <h6 class="mt-5"><strong>Sua bio:</strong></h6>
-                                    <p class="card-text">
-                                        {{ user.bio|default:"---" }}
-                                    </p>
-
-
-                                    <h6 class="my-3  display-6"><strong>Seus dados</strong></h6>
-                                    <ul class="list-unstyled">
-                                        <li><strong>Email:</strong> {{ user.email }}</li>
-                                        <li><strong>Idade:</strong> {{ user.idade|default:"-" }}</li>
-                                        <li><strong>Data de nascimento:</strong> {{ user.data_nascimento|date:"d/m/Y" }}
-                                        </li>
-                                        <li>
-                                            <strong>Endereço:</strong> {{ user.endereco|default:"-" }},
-                                            <strong>Número:</strong> {{ user.numero_endereco|default:"-" }},
-                                            <strong>Complemento:</strong> {{ user.complemento|default:"-" }}
-                                        </li>
-                                        <li><strong>Cidade:</strong> {{ user.cidade|default:"-" }}</li>
-                                        <li><strong>UF:</strong> {{ user.estado|default:"-" }}</li>
-                                        <li><strong>Telefone:</strong> {{ user.telefone|default:"-" }}</li>
-                                        <li><strong>WhatsApp:</strong> {{ user.whatsapp|default:"-" }}</li>
-                                        <br>
-                                        <li><strong>Criado em:</strong> {{ user.created_at|date:"d/m/Y H:i" }}</li>
-                                        
-                                    </ul>
-
+                                <!-- Header com botão de editar -->
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h3 class="text-primary mb-0">
+                                        <i class="bi bi-person-circle me-2"></i>
+                                    </h3>
+                                    <a href="{% url 'chaveiros:perfil-editar' %}" class="btn btn-primary">
+                                        <i class="fas a fa-pencil  fa-sm fa-fw "></i> Editar Perfil
+                                    </a>
                                 </div>
+
+                                <div class="row g-4 align-items-start">
+                                    <!-- Foto do Perfil -->
+                                    <div class="col-md-4 text-center">
+                                        {% if user.foto_profile %}
+                                        <img src="{{ user.foto_profile.url }}" class="img-fluid rounded-circle border"
+                                            alt="Foto de perfil" style="width: 220px;">
+                                        {% else %}
+                                        <img src="{% static 'images/avatar-default.jpg' %}"
+                                            class="img-fluid rounded-circle border" alt="Foto de perfil"
+                                            style="width: 220px;">
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Informações -->
+                                    <div class="col-md-8">
+                                        <p class="mt-3 display-6">{{ user.first_name }} {{ user.last_name }}</p>
+                                        <div class="d-flex gap-2">
+                                            <h5 class="mb-2 h3">Bio</h5>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mt-1" width="16" height="16" fill="currentColor" class="bi bi-chat-quote" viewBox="0 0 16 16">
+                                                <path d="M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105"/>
+                                                <path d="M7.066 6.76A1.665 1.665 0 0 0 4 7.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 0 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 7.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 0 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z"/>
+                                              </svg>
+
+                                        </div>
+                                        <p class="fw-bold ">
+                                            <blockquote class="blockquote">
+                                                {% if user.bio %}
+                                                <p class="h4 fst-italic pb-3 text-start text-break">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-muted" width="54" height="54" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                                                        <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/>
+                                                      </svg>
+                                                    {{ user.bio}}
+                                                </p>
+                                                    {% else %}
+                                                    <p class="text-muted h6">Sem biografia informada.</p>
+                                                    {% endif %}
+                                                </blockquote>
+                                            </p>
+
+                                        <div class="dropdown-divider"></div>
+                                        <h5 class="mt-4 mb-4 fw-bold">Informações Pessoais: </h5>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p><strong>Email:</strong> {{ user.email }}</p>
+
+                                                <p>
+                                                    <strong>Idade:</strong>
+                                                    {% if user.idade %}
+                                                    {{ user.idade }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Data de nascimento:</strong>
+                                                    {% if user.data_nascimento %}
+                                                    {{ user.data_nascimento|date:"d/m/Y" }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Telefone:</strong>
+                                                    {% if user.telefone %}
+                                                    {{ user.telefone }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <p>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                                                        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                                                      </svg>
+                                                    <strong>WhatsApp:</strong>
+                                                    {% if user.whatsapp %}
+                                                    {{ user.whatsapp }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <p>
+                                                    <strong>Endereço:</strong>
+                                                    {% if user.endereco %}
+                                                    {{ user.endereco }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Número:</strong>
+                                                    {% if user.numero_endereco %}
+                                                    {{ user.numero_endereco }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Complemento:</strong>
+                                                    {% if user.complemento %}
+                                                    {{ user.complemento }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Cidade/UF:</strong>
+                                                    {% if user.cidade or user.estado %}
+                                                    {{ user.cidade|default:"-" }}/{{ user.estado|default:"-" }}
+                                                    {% else %}
+                                                    <span class="text-muted">Não informado</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Criado em:</strong>
+                                                    {{ user.created_at|date:"d/m/Y H:i" }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                        
+                                    </div>
+                                </div>
+                                
                             </div>
-
                         </div>
-
-                        <p class="text-body-secondary small text-end m-4">
-                            <em>Última atualização há <strong>{{ user.updated_at|timesince }}</strong> atrás</em>
-                        </p>
                     </div>
                 </div>
             </div>
+            <div class="text-end mt-4 py-3 card-footer d-flex gap-1 justify-content-end">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mt-0 text-muted small" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
+                  </svg>
+                <p class="text-muted small fst-italic">Última atualização há <strong>{{ user.updated_at|timesince}}</strong> atrás.
+                </p> 
+            </div>
+
         </div>
     </div>
 </div>

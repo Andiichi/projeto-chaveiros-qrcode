@@ -10,8 +10,8 @@ from django.db import transaction
 from django.http import HttpResponse
 from .models import User
 from validarcodigo_app.models import  CodigoSecreto
+from .forms import PerfilForm  # Import PerfilForm from the forms module
 from datetime import datetime
-
 
 User = get_user_model()  # Busca o modelo de usuário dinamicamente
 
@@ -20,6 +20,7 @@ def cadastro(request, codigo):
     try:
         secret_code = CodigoSecreto.objects.get(code=codigo, used=False)
         grupo = secret_code.group
+
     except CodigoSecreto.DoesNotExist:
         secret_code = None
         grupo = None
@@ -32,16 +33,16 @@ def cadastro(request, codigo):
         first_name = request.POST.get('first_name', '').strip()
         last_name = request.POST.get('last_name', '').strip()
 
-        foto_profile = request.FILES.get('foto_profile')
-        endereco = request.POST.get('endereco', '')
-        numero_endereco = request.POST.get('numero_endereco', '')
-        complemento = request.POST.get('complemento', '')
-        cidade = request.POST.get('cidade', '')
-        estado = request.POST.get('estado', '')  # deve ser uma sigla válida
+        # foto_profile = request.FILES.get('foto_profile')
+        # endereco = request.POST.get('endereco', '')
+        # numero_endereco = request.POST.get('numero_endereco', '')
+        # complemento = request.POST.get('complemento', '')
+        # cidade = request.POST.get('cidade', '')
+        # estado = request.POST.get('estado', '')  # deve ser uma sigla válida
         data_nascimento_raw = request.POST.get('data_nascimento')
-        telefone = request.POST.get('telefone', '')
-        whatsapp = request.POST.get('whatsapp', '')
-        lembrar = request.POST.get('lembrar')
+        # telefone = request.POST.get('telefone', '')
+        # whatsapp = request.POST.get('whatsapp', '')
+        maior_idade = request.POST.get('maior_idade')
 
         # tipo_sanguineo = request.POST.get('tipo_sanguineo', '')
         # alergias = request.POST.get('alergias_intolerancias', '')
@@ -49,20 +50,44 @@ def cadastro(request, codigo):
         # link_whatsapp = request.POST.get('link_whatsapp', '')
         # links_outros = request.POST.get('links_outros', '')
 
+        # Verificar se o checkbox de maior de 18 anos foi marcado
+        if not maior_idade:# Se o checkbox não foi marcado
+            messages.error(request, 'Você precisa confirmar que é maior de 18 anos para se cadastrar.')
+            return render(request, 'register.html', {'codigo': codigo, 'grupo': grupo})
+
         # Validação da senha
         if password != confirm_password:
             messages.error(request, 'As senhas não coincidem.')
-            return render(request, 'register.html', {'codigo': codigo, 'grupo': grupo})
+            return render(request, 'register.html', {
+                                    'codigo': codigo,
+                                    'grupo': grupo,
+                                    'form_data': request.POST
+                                     })
 
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Este e-mail já está cadastrado.')
-            return render(request, 'register.html', {'codigo': codigo, 'grupo': grupo})
+            return render(request, 'register.html', {
+                                    'codigo': codigo,
+                                    'grupo': grupo,
+                                    'email_error': True,
+                                    'form_data': request.POST
+                                    })
 
-        # Converter data
+        # Converter a data de nascimento e verificar se o usuário é maior de 18 anos
         try:
             data_nascimento = datetime.strptime(data_nascimento_raw, '%Y-%m-%d').date() if data_nascimento_raw else None
+            if data_nascimento:
+                hoje = datetime.now().date()
+                idade = (hoje - data_nascimento).days // 365  # Calcula a idade em anos
+                if idade < 18:  # Verifica se o usuário é menor de 18 anos
+                    messages.error(request, 'Você precisa ter pelo menos 18 anos para se cadastrar.')
+                    return render(request, 'register.html', {
+                                    'codigo': codigo,
+                                    'grupo': grupo,
+                                    'form_data': request.POST
+                                     })
         except ValueError:
-            messages.error(request, 'Data de nascimento inválida.')
+            messages.error(request, 'Data de nascimento inválida.')  # Exibe mensagem de erro para data inválida
             return render(request, 'register.html', {'codigo': codigo, 'grupo': grupo})
 
         if secret_code:
@@ -72,14 +97,14 @@ def cadastro(request, codigo):
                     password=password,
                     first_name=first_name,
                     last_name=last_name,
-                    endereco=endereco,
-                    numero_endereco=numero_endereco,
-                    complemento=complemento,
-                    cidade=cidade,
-                    estado=estado,
+                    # endereco=endereco,
+                    # numero_endereco=numero_endereco,
+                    # complemento=complemento,
+                    # cidade=cidade,
+                    # estado=estado,
                     data_nascimento=data_nascimento,
-                    telefone=telefone,
-                    whatsapp=whatsapp,
+                    # telefone=telefone,
+                    # whatsapp=whatsapp,
                 )
 
                 # if foto_profile:
@@ -105,9 +130,6 @@ def cadastro(request, codigo):
             messages.success(request, 'Cadastro realizado com sucesso! Você já pode fazer login.')
             response = redirect('auth_app:entrar')
 
-            if lembrar:
-                response.set_cookie('lembrar_email', email, max_age=30 * 24 * 60 * 60)
-
             return response
         else:
             messages.error(request, 'Código inválido ou já utilizado.')
@@ -115,8 +137,9 @@ def cadastro(request, codigo):
     return render(request, 'register.html', {
         'codigo': codigo,
         'grupo': grupo,
-        'lembrar_email': request.COOKIES.get('lembrar_email', '')
-    })
+        'form_data': request.POST
+        })
+
 
 def user_login(request):
     if request.user.is_authenticated:
@@ -143,7 +166,10 @@ def user_login(request):
         else:
             messages.error(request, 'Credenciais inválidas. Tente novamente.')
 
-    return render(request, 'login.html')
+    return render(request, 'login.html',{
+        'form_data': request.POST,
+    })
+
 
 
 @login_required(login_url='auth_app:entrar')
