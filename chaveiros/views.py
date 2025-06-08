@@ -83,6 +83,7 @@ def atualizar_perfil(request):
         'estados': estados,
         })
 
+
 @login_required
 def atualizar_foto(request):
     if request.method == 'POST':

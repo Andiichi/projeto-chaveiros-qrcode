@@ -14,11 +14,11 @@ urlpatterns = [
 
     # Rotas do Dashboard
     path('dashboard/', login_required(TemplateView.as_view(template_name='dashboard/dashboard_principal.html')), name='dashboard'),
-    path('dashboard/listagem', login_required(TemplateView.as_view(template_name='dashboard/dashboard_listagem.html')), name='dashboard_listagem'),
+    path('dashboard/listagem/', login_required(TemplateView.as_view(template_name='dashboard/dashboard_listagem.html')), name='dashboard_listagem'),
 
     # Rotas do perfil e editar perfil
-    path('dashboard/perfil', login_required(TemplateView.as_view(template_name='dashboard/dashboard_profile.html')), name='perfil'),
-    path('dashboard/editar-perfil', atualizar_perfil, name='perfil-editar'),
+    path('perfil/', login_required(TemplateView.as_view(template_name='dashboard/dashboard_profile.html')), name='perfil'),
+    path('configurações/editar-perfil/', atualizar_perfil, name='perfil-editar'),
     path('atualizar-foto/', atualizar_foto, name='atualizar_foto'),
 
 ]

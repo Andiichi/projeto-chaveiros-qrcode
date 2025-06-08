@@ -7,10 +7,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.utils import timezone
 from django.db import transaction
-from django.http import HttpResponse
 from .models import User
 from validarcodigo_app.models import  CodigoSecreto
-from .forms import PerfilForm  # Import PerfilForm from the forms module
 from datetime import datetime
 
 User = get_user_model()  # Busca o modelo de usuário dinamicamente
